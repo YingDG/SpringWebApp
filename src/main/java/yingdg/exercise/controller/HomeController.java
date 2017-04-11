@@ -3,10 +3,7 @@ package yingdg.exercise.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
 
@@ -21,7 +18,7 @@ public class HomeController {
     @Resource
     private UserMapper mapper;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping
     public String index() {
         return "redirect:home.html";
     }
@@ -31,10 +28,22 @@ public class HomeController {
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity findUser(@PathVariable("id") int id) {
+    public ResponseEntity<User> findUser(@PathVariable("id") int id) {
         User user = mapper.findUserById(id);
         System.out.println(user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    /*
+   Rest请求与响应
+    */
+    @RequestMapping(value = "/user/new", method = RequestMethod.PUT)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public User addUser(User user) {
+        System.out.println(user);
+
+        return user;
     }
 
 }

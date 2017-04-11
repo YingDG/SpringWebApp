@@ -25,6 +25,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.7" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.7" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:18.0" />
         </element>
       </element>
