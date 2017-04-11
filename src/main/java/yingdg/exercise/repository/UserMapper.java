@@ -13,7 +13,13 @@ import yingdg.exercise.model.User;
 @Repository
 public interface UserMapper {
 
+    /*
+    只使用Mybatis注解
+     */
     @Select("SELECT * FROM USER WHERE ID = #{id}")
-    @Results(value = {@Result(column = "id", property = "id", id = true)})
+    @Results(value = {
+            @Result(column = "id", property = "id", id = true)
+    })
     User findUserById(@Param("id") int id);
+
 }
