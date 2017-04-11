@@ -27,7 +27,7 @@ public class HomeController {
     }
 
     /*
-    Rest请求
+    Rest请求与响应
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
