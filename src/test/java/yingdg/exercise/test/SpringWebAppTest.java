@@ -1,6 +1,7 @@
 package yingdg.exercise.test;
 
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,8 +17,8 @@ import javax.annotation.Resource;
  */
 @WebAppConfiguration // Spring WebApp单元测试，否则报错
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = SpringConfig.class)
-public class Test {
+@ContextConfiguration(classes = {SpringConfig.class})
+public class SpringWebAppTest {
     @Resource
     private UserMapper mapper;
     @Resource
@@ -31,7 +32,7 @@ public class Test {
         System.out.println(user);
     }
 
-    @org.junit.Test
+    @Test
     public void test3() {
         User user = mapper.findUserById(2);
         System.out.println(user);
