@@ -1,9 +1,9 @@
 package yingdg.exercise.model;
 
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by yingdg on 2017/4/10.
@@ -14,6 +14,8 @@ public class User {
     private int id;
     private String username;
     private int age;
+    @Resource
+    private Info info;
 
     public User() {
 
@@ -48,12 +50,21 @@ public class User {
         this.age = age;
     }
 
+    public Info getInfo() {
+        return info;
+    }
+
+    public void setInfo(Info info) {
+        this.info = info;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", age=" + age +
+                ", info=" + info +
                 '}';
     }
 

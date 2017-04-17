@@ -4,12 +4,17 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
 /**
  * Created by yingdg on 2017/4/10.
@@ -19,7 +24,8 @@ import javax.sql.DataSource;
 @Configuration
 // 开启IOC与AOP
 @ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = true, // 懒加载
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {})}) // 排除例外
+        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})})
+// 排除例外
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
@@ -50,7 +56,7 @@ public class SpringConfig {
     配置事务管理器
      */
     @Bean
-    public DataSourceTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager() {
         // jdbc事务
         return new DataSourceTransactionManager(dataSource());
     }
@@ -59,12 +65,20 @@ public class SpringConfig {
     配置sqlSessionFactory
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() {
+    public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
+        // sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:*Mapper.xml"));
 
         return sqlSessionFactory;
+    }
+
+    // 扫描指定包以外的所有包（非必须配置）
+    public static class WebPackage extends RegexPatternTypeFilter {
+        public WebPackage() {
+            super(Pattern.compile("yingdg.exercise\\.webapp"));
+        }
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import yingdg.exercise.config.SpringConfig;
+import yingdg.exercise.model.Info;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
 
@@ -24,15 +25,16 @@ public class SpringWebAppTest {
     @Resource
     private User user;
 
-    @Ignore
+    @Test
     public void test() {
         user.setId(1);
         user.setUsername("zdm");
         user.setAge(25);
-        System.out.println(user);
+        user.getInfo().setAdd("add");
+        System.out.println(user.getInfo());
     }
 
-    @Test
+    @Ignore
     public void test3() {
         User user = mapper.findUserById(2);
         System.out.println(user);
