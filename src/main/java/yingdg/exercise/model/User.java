@@ -1,10 +1,14 @@
 package yingdg.exercise.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by yingdg on 2017/4/10.
@@ -13,7 +17,14 @@ import javax.annotation.Resource;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class User {
     private int id;
+
+    // 值校验
+    @NotNull
+    @NotEmpty
+    @Size(min = 2, message = "至少2个字符！")
     private String username;
+    @NotNull
+    @Min(value = 10, message = "最小10岁！")
     private int age;
     @Resource
     private Info info;

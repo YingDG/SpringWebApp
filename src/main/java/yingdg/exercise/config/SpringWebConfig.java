@@ -1,6 +1,7 @@
 package yingdg.exercise.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -20,10 +21,10 @@ import java.util.List;
 
 // SpringWeb 配置类
 @Configuration
-// 导入Spring配置
-@Import({SpringConfig.class})
 // 启用SpringMVC
 @EnableWebMvc
+// 导入Spring配置
+@Import({SpringConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean

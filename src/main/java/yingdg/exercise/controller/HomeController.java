@@ -3,18 +3,20 @@ package yingdg.exercise.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 /**
  * Created by yingdg on 2017/4/10.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/"})
 public class HomeController {
     @Resource
     private UserMapper mapper;
@@ -41,8 +43,12 @@ public class HomeController {
     @RequestMapping(value = "/user/new", method = RequestMethod.PUT)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public User addUser(User user) {
-        System.out.println(user);
+    public User addUser(@Valid User user, Errors errors) {
+        if (!errors.hasErrors()) {
+            System.out.println(user);
+        } else {
+            System.out.println(errors.getAllErrors());
+        }
 
         return user;
     }

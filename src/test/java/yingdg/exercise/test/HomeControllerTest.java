@@ -21,6 +21,7 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringWebConfig.class)
 public class HomeControllerTest {
+    // 要测试的Controller
     @Resource
     private HomeController controller;
 
