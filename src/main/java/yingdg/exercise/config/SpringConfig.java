@@ -22,10 +22,11 @@ import java.util.regex.Pattern;
 
 // Spring配置类，基本+ORM
 @Configuration
+// 指定环境便于切换
+// @Profile("dev")
 // 开启IOC与AOP
 @ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = true, // 懒加载
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})})
-// 排除例外
+        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})}) // 排除例外
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
@@ -41,6 +42,7 @@ public class SpringConfig {
     配置数据源
      */
     @Bean
+    @Primary
     public DataSource dataSource() {
         // Spring数据源管理
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -69,7 +71,7 @@ public class SpringConfig {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
-        // sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:*Mapper.xml"));
+        // sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:*Mapper.xml"));
 
         return sqlSessionFactory;
     }

@@ -3,6 +3,7 @@ package yingdg.exercise.test;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -19,13 +20,15 @@ import javax.annotation.Resource;
 @WebAppConfiguration // Spring WebApp单元测试，否则报错
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfig.class})
+// @ActiveProfiles("dev")
 public class SpringWebAppTest {
     @Resource
     private UserMapper mapper;
     @Resource
     private User user;
 
-    @Test
+    @Ignore
+    // @Test
     public void test() {
         user.setId(1);
         user.setUsername("zdm");
@@ -34,7 +37,7 @@ public class SpringWebAppTest {
         System.out.println(user.getInfo());
     }
 
-    @Ignore
+    @Test
     public void test3() {
         User user = mapper.findUserById(2);
         System.out.println(user);

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
 
@@ -20,7 +21,7 @@ public class HomeController {
 
     @RequestMapping
     public String index() {
-        return "redirect:home.html";
+        return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "home.html";
     }
 
     /*

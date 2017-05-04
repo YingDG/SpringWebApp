@@ -1,5 +1,6 @@
 package yingdg.exercise.model;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +10,7 @@ import javax.annotation.Resource;
  * Created by yingdg on 2017/4/10.
  */
 @Component
-@Scope("prototype")
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class User {
     private int id;
     private String username;
