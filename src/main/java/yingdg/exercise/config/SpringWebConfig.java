@@ -3,8 +3,12 @@ package yingdg.exercise.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,6 +21,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +110,20 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(mediaTypes);
         return converter;
+    }
+
+    /*
+    配置文件上传
+     */
+    @Bean
+    public MultipartResolver multipartResolver() throws IOException {
+        // Jakarta Commons FileUpload解析(需要Apache Commons FileUpload), Servlet 3.0以下方案
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setUploadTempDir(new FileSystemResource("/uploads"));
+//        multipartResolver.setMaxUploadSize(2097152);
+//        multipartResolver.setMaxInMemorySize(0);
+
+        return new StandardServletMultipartResolver();
     }
 
 }

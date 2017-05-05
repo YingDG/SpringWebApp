@@ -2,6 +2,10 @@ package yingdg.exercise.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+
 /**
  * Created by yingdg on 2017/4/10.
  */
@@ -30,5 +34,22 @@ public class SpringWebInitializer extends AbstractAnnotationConfigDispatcherServ
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
+
+    /*
+    Filter
+     */
+//    @Override
+//    protected Filter[] getServletFilters() {
+//        return new Filter[]{};
+//    }
+
+    /*
+    Multipart文件上传
+     */
+//    @Override
+//    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+//        registration.setMultipartConfig(
+//                new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
+//    }
 
 }

@@ -3,12 +3,9 @@ package yingdg.exercise.config;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 
 /**
  * Created by yingdg on 2017/4/10.
@@ -27,6 +24,13 @@ public class SpringWebFilter implements WebApplicationInitializer {
         HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         FilterRegistration.Dynamic springHiddenHttpMethodFilter = servletContext.addFilter("HiddenHttpMethodFilter", hiddenHttpMethodFilter);
         springHiddenHttpMethodFilter.addMappingForUrlPatterns(null, false, "/*");
+
+        // 文件上传参数设置
+        DispatcherServlet fileDispatcherServlet = new DispatcherServlet();
+        ServletRegistration.Dynamic fileUploadRegistration = servletContext.addServlet("fileServlet", fileDispatcherServlet);
+        fileUploadRegistration.addMapping("/*");
+        fileUploadRegistration.setMultipartConfig(
+                new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
     }
 
 }

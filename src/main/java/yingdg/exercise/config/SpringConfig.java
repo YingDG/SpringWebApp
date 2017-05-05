@@ -26,7 +26,8 @@ import java.util.regex.Pattern;
 // @Profile("dev")
 // 开启IOC与AOP
 @ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = true, // 懒加载
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})}) // 排除例外
+        excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})})
+// 排除例外
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
@@ -43,6 +44,7 @@ public class SpringConfig {
      */
     @Bean
     @Primary
+    // @Profile("dev")
     public DataSource dataSource() {
         // Spring数据源管理
         DriverManagerDataSource dataSource = new DriverManagerDataSource();

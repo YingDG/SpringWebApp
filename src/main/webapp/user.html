@@ -10,5 +10,10 @@
     <h2 th:text="${user.username}">a</h2>
     <h2 th:text="${user.age}">2</h2>
 </div>
+
+<form action="/user/file" method="post" enctype="multipart/form-data">
+    <input type="file" name="userFile" accept="image/jpeg"/><br>
+    <input type="submit"/>
+</form>
 </body>
 </html>
