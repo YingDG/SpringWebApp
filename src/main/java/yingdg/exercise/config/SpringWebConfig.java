@@ -1,7 +1,6 @@
 package yingdg.exercise.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -11,6 +10,12 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +34,47 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("./");
-        viewResolver.setSuffix(".jsp");
-        viewResolver.setExposeContextBeansAsAttributes(true);
+        /*
+        JSP
+         */
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver(); // 一般解析JSP视图
+//        viewResolver.setPrefix("./"); // 前缀
+//        viewResolver.setSuffix(".jsp"); // 后缀
+//        viewResolver.setViewClass(JstlView.class); // 转换为JSTL视图
+        // viewResolver.setExposeContextBeansAsAttributes(true);
+
+        // TilesViewResolver tilesViewResolver = new TilesViewResolver(); // 控制JSP页面布局
+
+        /*
+        Thymeleaf
+         */
+        // 视图解析器
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+
         return viewResolver;
+    }
+
+    /*
+    配置Spring模板引擎
+     */
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
+    }
+
+    /*
+    配置模板解析器
+     */
+    @Bean
+    public TemplateResolver templateResolver() {
+        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("./");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
     }
 
     /*

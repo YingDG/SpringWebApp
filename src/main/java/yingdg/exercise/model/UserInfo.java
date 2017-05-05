@@ -10,12 +10,11 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @Component
 // session级别
-@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.INTERFACES)
-public class Info {
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class UserInfo {
     private String add;
 
-    // Spring注入不受影响
-    private Info() {
+    public UserInfo() {
 
     }
 

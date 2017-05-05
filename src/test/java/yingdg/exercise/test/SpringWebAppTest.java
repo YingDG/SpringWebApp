@@ -3,12 +3,10 @@ package yingdg.exercise.test;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import yingdg.exercise.config.SpringConfig;
-import yingdg.exercise.model.Info;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
 
@@ -33,8 +31,8 @@ public class SpringWebAppTest {
         user.setId(1);
         user.setUsername("zdm");
         user.setAge(25);
-        user.getInfo().setAdd("add");
-        System.out.println(user.getInfo());
+        user.getUserInfo().setAdd("add");
+        System.out.println(user.getUserInfo());
     }
 
     @Test

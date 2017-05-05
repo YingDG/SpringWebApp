@@ -27,7 +27,7 @@ public class User {
     @Min(value = 10, message = "最小10岁！")
     private int age;
     @Resource
-    private Info info;
+    private UserInfo userInfo;
 
     public User() {
 
@@ -62,12 +62,12 @@ public class User {
         this.age = age;
     }
 
-    public Info getInfo() {
-        return info;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setInfo(Info info) {
-        this.info = info;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", age=" + age +
-                ", info=" + info +
+                ", userInfo=" + userInfo +
                 '}';
     }
 
