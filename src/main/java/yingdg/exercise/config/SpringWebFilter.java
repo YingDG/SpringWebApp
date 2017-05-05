@@ -26,11 +26,11 @@ public class SpringWebFilter implements WebApplicationInitializer {
         springHiddenHttpMethodFilter.addMappingForUrlPatterns(null, false, "/*");
 
         // 文件上传参数设置
-        DispatcherServlet fileDispatcherServlet = new DispatcherServlet();
-        ServletRegistration.Dynamic fileUploadRegistration = servletContext.addServlet("fileServlet", fileDispatcherServlet);
-        fileUploadRegistration.addMapping("/*");
-        fileUploadRegistration.setMultipartConfig(
-                new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
+//        DispatcherServlet fileDispatcherServlet = new DispatcherServlet();
+//        ServletRegistration.Dynamic fileUploadRegistration = servletContext.addServlet("fileServlet", fileDispatcherServlet);
+//        fileUploadRegistration.addMapping("/*");
+//        fileUploadRegistration.setMultipartConfig(
+//                new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
     }
 
 }
