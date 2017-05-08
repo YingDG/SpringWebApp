@@ -11,8 +11,9 @@
     <h2 th:text="${user.age}">2</h2>
 </div>
 
+<!--thymeleaf模板基于xhtml-->
 <form action="/user/file" method="post" enctype="multipart/form-data">
-    <input type="file" name="userFile" accept="image/jpeg"/><br>
+    <input type="file" name="userFile" accept="image/jpeg"/><br/>
     <input type="submit"/>
 </form>
 </body>

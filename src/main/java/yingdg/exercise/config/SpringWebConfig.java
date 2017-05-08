@@ -4,8 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -105,7 +107,8 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MappingJackson2HttpMessageConverter jacksonConverter() {
         List<org.springframework.http.MediaType> mediaTypes = new ArrayList<>();
-        mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
+        // mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
+        mediaTypes.add(MediaType.APPLICATION_JSON);
 
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(mediaTypes);
@@ -125,5 +128,12 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
         return new StandardServletMultipartResolver();
     }
+
+//    @Bean
+//    public ContentNegotiationManagerFactoryBean contentNegotiationManager() {
+//        ContentNegotiationManagerFactoryBean contentNegotiationManagerFactoryBean = new ContentNegotiationManagerFactoryBean();
+//        contentNegotiationManagerFactoryBean.setDefaultContentType(MediaType.APPLICATION_JSON);
+//        return contentNegotiationManagerFactoryBean;
+//    }
 
 }

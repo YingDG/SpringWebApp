@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
 // 开启声明式事务
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 // Mybatis Mapper配置扫描
 @MapperScan(basePackages = "yingdg.exercise.repository")
 public class SpringConfig {
@@ -46,7 +46,7 @@ public class SpringConfig {
     @Primary
     // @Profile("dev")
     public DataSource dataSource() {
-        // Spring数据源管理
+        // Spring数据源管理（非连接池）
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
@@ -55,6 +55,10 @@ public class SpringConfig {
 
         return dataSource;
     }
+
+    /*
+    JNDI数据源
+     */
 
     /*
     配置事务管理器
