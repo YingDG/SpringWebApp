@@ -63,6 +63,7 @@ public class SpringConfig {
     Tomcat:
     server.xml下 <GlobalNamingResources></GlobalNamingResources>中的配置
     <Resource
+        name="jdbc/DBPool"
         auth="Container"
         description="DB Connection"
         driverClass="Oracle.jdbc.driver.OracleDriver"
@@ -86,7 +87,7 @@ public class SpringConfig {
 //    @Bean
 //    public JndiObjectFactoryBean jndiDataSource() {
 //        JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
-//        jndiObjectFactoryBean.setJndiName("jdbc/db");
+//        jndiObjectFactoryBean.setJndiName("jdbc/DBPool");
 //        jndiObjectFactoryBean.setResourceRef(true);
 //        jndiObjectFactoryBean.setProxyInterface(DataSource.class);
 //
