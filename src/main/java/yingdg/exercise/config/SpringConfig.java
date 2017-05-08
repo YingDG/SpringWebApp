@@ -8,6 +8,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -58,7 +59,39 @@ public class SpringConfig {
 
     /*
     JNDI数据源
+
+    Tomcat:
+    server.xml下 <GlobalNamingResources></GlobalNamingResources>中的配置
+    <Resource
+        auth="Container"
+        description="DB Connection"
+        driverClass="Oracle.jdbc.driver.OracleDriver"
+        maxPoolSize="50"
+        minPoolSize="2"
+        initialPoolSize="5"
+        maxIdleTime="60"
+        autoCommitOnClose="true"
+        acquireIncrement="3"
+        name="jdbc/DBPool"
+        user="root"
+        password="123456"
+        jdbcUrl="jdbc:oracle:thin:@192.168.120.165:1521:orcl10"
+        factory="org.apache.naming.factory.BeanFactory"
+        type="com.mchange.v2.c3p0.ComboPooledDataSource"
+        />
+
+        context.xml下<Context></Context>中的配置
+        <ResourceLink global="jdbc/DBPool" name="jdbc/DBPool" type="javax.sql.DataSource" />
      */
+//    @Bean
+//    public JndiObjectFactoryBean jndiDataSource() {
+//        JndiObjectFactoryBean jndiObjectFactoryBean = new JndiObjectFactoryBean();
+//        jndiObjectFactoryBean.setJndiName("jdbc/db");
+//        jndiObjectFactoryBean.setResourceRef(true);
+//        jndiObjectFactoryBean.setProxyInterface(DataSource.class);
+//
+//        return jndiObjectFactoryBean;
+//    }
 
     /*
     配置事务管理器
