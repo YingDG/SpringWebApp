@@ -1,5 +1,7 @@
 package yingdg.exercise.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -12,10 +14,16 @@ import org.springframework.web.context.WebApplicationContext;
 // session级别
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserInfo {
+    @Email(message = "email格式不对！")
+    @NotEmpty
     private String add;
 
     public UserInfo() {
 
+    }
+
+    public UserInfo(String add) {
+        this.add = add;
     }
 
     public String getAdd() {

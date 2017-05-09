@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,6 +28,8 @@ public class User {
     @Min(value = 10, message = "最小10岁！")
     private int age;
     @Resource
+    @Valid
+    @NotNull
     private UserInfo userInfo;
 
     public User() {

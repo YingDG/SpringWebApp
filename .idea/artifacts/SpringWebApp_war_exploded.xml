@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="SpringWebApp:war exploded">
-    <output-path>$PROJECT_DIR$/target/yingdg.exercise</output-path>
+    <output-path>$PROJECT_DIR$/target/SpringWebApp</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -37,10 +37,12 @@
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.3.4.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
           <element id="library" level="project" name="Maven: com.fasterxml:classmate:1.3.1" />
+          <element id="library" level="project" name="Maven: javax.el:javax.el-api:3.0.0" />
+          <element id="library" level="project" name="Maven: org.glassfish.web:javax.el:2.2.6" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/yingdg.exercise/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/SpringWebApp/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="SpringWebApp/web/Web" />
     </root>
