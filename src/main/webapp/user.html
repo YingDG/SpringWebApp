@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>User</title>
+</head>
+<body>
+<div>
+    <h2 th:text="${user.id}">1</h2>
+    <h2 th:text="${user.username}">a</h2>
+    <h2 th:text="${user.age}">2</h2>
+</div>
+
+<!--thymeleaf模板基于xhtml-->
+<form action="/user/file" method="post" enctype="multipart/form-data">
+    <input type="file" name="userFile" accept="image/jpeg"/><br/>
+    <input type="submit"/>
+</form>
+</body>
+</html>

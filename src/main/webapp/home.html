@@ -6,5 +6,19 @@
 </head>
 <body>
 <h1 align="center">Hello, MySpringWeb!</h1>
+
+<div align="center">
+    <form action="./user/new" method="post">
+        <!--转换为restful PUT请求-->
+        <input type="hidden" name="_method" value="put"/><br/>
+
+        <label for="name">Username:</label>
+        <input id="name" name="username" type="text"/><br/>
+        <label for="age">Age:</label>
+        <input id="age" name="age" type="text"/><br/>
+
+        <input type="submit"/>
+    </form>
+</div>
 </body>
 </html>

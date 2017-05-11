@@ -15,7 +15,7 @@ public class Main {
 
         User user = app.getBean(User.class);
         user.setId(1);
-        user.setUsername("zdm");
+        user.setUsername("yingdg");
         user.setAge(25);
         System.out.println(user);
     }

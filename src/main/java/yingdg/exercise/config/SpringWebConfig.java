@@ -3,14 +3,27 @@ package yingdg.exercise.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,18 +33,55 @@ import java.util.List;
 
 // SpringWeb 配置类
 @Configuration
-// 导入Spring配置
-@Import({SpringConfig.class})
 // 启用SpringMVC
 @EnableWebMvc
+// 导入Spring配置
+@Import({SpringConfig.class})
 public class SpringWebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("./");
-        viewResolver.setSuffix(".jsp");
+        /*
+        JSP
+         */
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver(); // 一般解析JSP视图
+//        viewResolver.setPrefix("./"); // 前缀
+//        viewResolver.setSuffix(".jsp"); // 后缀
+//        viewResolver.setViewClass(JstlView.class); // 转换为JSTL视图
+        // viewResolver.setExposeContextBeansAsAttributes(true);
+
+        // TilesViewResolver tilesViewResolver = new TilesViewResolver(); // 控制JSP页面布局
+
+        /*
+        Thymeleaf
+         */
+        // 视图解析器
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+
         return viewResolver;
+    }
+
+    /*
+    配置Spring模板引擎
+     */
+    @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
+    }
+
+    /*
+    配置模板解析器
+     */
+    @Bean
+    public TemplateResolver templateResolver() {
+        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("./");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        return templateResolver;
     }
 
     /*
@@ -57,11 +107,33 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MappingJackson2HttpMessageConverter jacksonConverter() {
         List<org.springframework.http.MediaType> mediaTypes = new ArrayList<>();
-        mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
+        // mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
+        mediaTypes.add(MediaType.APPLICATION_JSON);
 
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(mediaTypes);
         return converter;
     }
+
+    /*
+    配置文件上传
+     */
+    @Bean
+    public MultipartResolver multipartResolver() throws IOException {
+        // Jakarta Commons FileUpload解析(需要Apache Commons FileUpload), Servlet 3.0以下方案
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        multipartResolver.setUploadTempDir(new FileSystemResource("/uploads"));
+//        multipartResolver.setMaxUploadSize(2097152);
+//        multipartResolver.setMaxInMemorySize(0);
+
+        return new StandardServletMultipartResolver();
+    }
+
+//    @Bean
+//    public ContentNegotiationManagerFactoryBean contentNegotiationManager() {
+//        ContentNegotiationManagerFactoryBean contentNegotiationManagerFactoryBean = new ContentNegotiationManagerFactoryBean();
+//        contentNegotiationManagerFactoryBean.setDefaultContentType(MediaType.APPLICATION_JSON);
+//        return contentNegotiationManagerFactoryBean;
+//    }
 
 }
