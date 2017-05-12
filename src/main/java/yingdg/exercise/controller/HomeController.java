@@ -1,5 +1,7 @@
 package yingdg.exercise.controller;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import javax.validation.Valid;
  * Created by yingdg on 2017/4/10.
  */
 @Controller
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 @RequestMapping({"/"})
 public class HomeController {
     @Resource
@@ -24,7 +27,7 @@ public class HomeController {
 
     @RequestMapping
     public String index() {
-        return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "home.html";
+        return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "./home.html";
     }
 
     /*
