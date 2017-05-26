@@ -1,6 +1,16 @@
 package spring;
 
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.MethodInvocationException;
+import org.springframework.beans.PropertyAccessor;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.beans.factory.config.CustomEditorConfigurer;
+import org.springframework.beans.propertyeditors.CustomBooleanEditor;
+import org.springframework.beans.propertyeditors.ResourceBundleEditor;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.OverridingClassLoader;
@@ -14,8 +24,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MySpringCodeDictionary {
-    public static void main(String[] args) throws InterruptedException {
-        // Core包
+
+    /*
+    Core包
+     */
+    @Ignore
+    // @Test
+    public void core() throws InterruptedException {
         System.out.println(ApplicationContext.CLASSPATH_ALL_URL_PREFIX); // classpath*:
         System.out.println(ApplicationContext.CLASSPATH_URL_PREFIX); // classpath:
         System.out.println(ApplicationContext.FACTORY_BEAN_PREFIX); // &
@@ -86,4 +101,34 @@ public class MySpringCodeDictionary {
         System.out.println(SystemPropertyUtils.PLACEHOLDER_SUFFIX); // "}"
         System.out.println(SystemPropertyUtils.VALUE_SEPARATOR); // ":"
     }
+
+    /*
+    Beans包
+     */
+    @Test
+    public void beans() {
+        System.out.println(MethodInvocationException.ERROR_CODE); // methodInvocation
+        System.out.println(PropertyAccessor.NESTED_PROPERTY_SEPARATOR); // "."
+        System.out.println(PropertyAccessor.NESTED_PROPERTY_SEPARATOR_CHAR); // '.'
+        System.out.println(PropertyAccessor.PROPERTY_KEY_PREFIX); // "["
+        System.out.println(PropertyAccessor.PROPERTY_KEY_PREFIX_CHAR); // '['
+        System.out.println(PropertyAccessor.PROPERTY_KEY_SUFFIX); // "]"
+        System.out.println(PropertyAccessor.PROPERTY_KEY_SUFFIX_CHAR); // ']'
+        System.out.println(TypeMismatchException.ERROR_CODE); // typeMismatch
+        System.out.println(PagedListHolder.DEFAULT_MAX_LINKED_PAGES); // 10
+        System.out.println(PagedListHolder.DEFAULT_PAGE_SIZE); // 10
+        System.out.println(CustomBooleanEditor.VALUE_0); // "0"
+        System.out.println(CustomBooleanEditor.VALUE_1); // "1"
+        System.out.println(CustomBooleanEditor.VALUE_FALSE); // "false"
+        System.out.println(CustomBooleanEditor.VALUE_TRUE); // 'true"
+        System.out.println(CustomBooleanEditor.VALUE_NO); // no
+        System.out.println(CustomBooleanEditor.VALUE_YES); // yes
+        System.out.println(CustomBooleanEditor.VALUE_OFF); // off
+        System.out.println(CustomBooleanEditor.VALUE_ON); // on
+        System.out.println(ResourceBundleEditor.BASE_NAME_SEPARATOR); // "_"
+        System.out.println(StringArrayPropertyEditor.DEFAULT_SEPARATOR); // ","
+        // TODO package factory
+
+    }
+
 }
