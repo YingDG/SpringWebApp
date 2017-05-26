@@ -20,7 +20,7 @@ import javax.validation.Valid;
  */
 @Controller
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-@RequestMapping({"/"})
+@RequestMapping("/")
 public class HomeController {
     @Resource
     private UserMapper mapper;
@@ -59,13 +59,13 @@ public class HomeController {
     @RequestMapping(value = "/user/new", method = RequestMethod.PUT)
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public User addUser(@Valid User user, Errors errors) {
+    public Object addUser(@Valid User user, Errors errors) {
         if (!errors.hasErrors()) {
             System.out.println(user);
             return user;
         } else {
             System.out.println(errors.getAllErrors());
-            return null;
+            return errors.getAllErrors();
         }
     }
 

@@ -2,6 +2,7 @@ package yingdg.exercise.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -111,7 +112,8 @@ public class SpringConfig {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
-        // sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:*Mapper.xml"));
+//        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
+//                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
 
         return sqlSessionFactory;
     }
