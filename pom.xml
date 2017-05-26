@@ -112,6 +112,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.3.4.Final</version>
         </dependency>
+        <!--非SpringMVC校验必备-->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>

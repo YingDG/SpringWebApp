@@ -18,18 +18,22 @@ public class HelloValidator {
         Validator validator = validatorFactory.getValidator();
 
         User user = new User("z", 6);
-        UserInfo userInfo = new UserInfo("");
+        UserInfo userInfo = new UserInfo("com");
         user.setUserInfo(userInfo);
 
         Set<ConstraintViolation<User>> validateInfo = validator.validate(user);
-        System.out.println(validateInfo);
+
+        if (!validateInfo.isEmpty()) {
+            System.out.println("校验不通过！");
+            System.out.println(validateInfo);
+        }
         for (ConstraintViolation constraintViolation : validateInfo) {
             // 异常类
-            System.out.println(constraintViolation.getRootBeanClass().getName());
+            System.out.println("异常类：" + constraintViolation.getRootBeanClass().getName());
             // 异常属性
-            System.out.println(constraintViolation.getPropertyPath());
+            System.out.println("属性：" + constraintViolation.getPropertyPath());
             // 异常信息
-            System.out.println(constraintViolation.getMessage());
+            System.out.println("校验信息：" + constraintViolation.getMessage());
         }
     }
 }

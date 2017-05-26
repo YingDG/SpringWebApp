@@ -7,6 +7,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by yingdg on 2017/4/17.
  */
@@ -15,7 +17,8 @@ import org.springframework.web.context.WebApplicationContext;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserInfo {
     @Email(message = "email格式不对！")
-    @NotEmpty
+    @NotNull
+    // @NotEmpty
     private String add;
 
     public UserInfo() {
