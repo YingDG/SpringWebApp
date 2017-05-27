@@ -5,20 +5,46 @@ import org.junit.Test;
 import org.springframework.beans.MethodInvocationException;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.TypeMismatchException;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.beans.factory.config.CustomEditorConfigurer;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.beans.factory.config.*;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.springframework.beans.factory.support.AutowireCandidateQualifier;
+import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
+import org.springframework.beans.factory.support.PropertiesBeanDefinitionReader;
+import org.springframework.beans.factory.wiring.BeanWiringInfo;
+import org.springframework.beans.factory.xml.*;
 import org.springframework.beans.propertyeditors.CustomBooleanEditor;
 import org.springframework.beans.propertyeditors.ResourceBundleEditor;
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.cache.config.CacheManagementConfigUtils;
+import org.springframework.cache.interceptor.DefaultKeyGenerator;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.access.ContextJndiBeanFactoryLocator;
+import org.springframework.context.annotation.AdviceModeImportSelector;
+import org.springframework.context.expression.StandardBeanExpressionResolver;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.LiveBeansView;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.weaving.AspectJWeavingEnabler;
 import org.springframework.core.Ordered;
 import org.springframework.core.OverridingClassLoader;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.support.LocalizedResourceHelper;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
+import org.springframework.instrument.classloading.ShadowingClassLoader;
+import org.springframework.jmx.support.ConnectorServerFactoryBean;
+import org.springframework.jmx.support.JmxUtils;
+import org.springframework.jndi.JndiLocatorSupport;
+import org.springframework.remoting.rmi.RemoteInvocationSerializingExporter;
+import org.springframework.scheduling.annotation.AsyncAnnotationBeanPostProcessor;
+import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
 import org.springframework.util.*;
 import org.springframework.util.xml.DomUtils;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.DefaultBindingErrorProcessor;
+import org.springframework.validation.Errors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +57,6 @@ public class MySpringCodeDictionary {
     @Ignore
     // @Test
     public void core() throws InterruptedException {
-        System.out.println(ApplicationContext.CLASSPATH_ALL_URL_PREFIX); // classpath*:
-        System.out.println(ApplicationContext.CLASSPATH_URL_PREFIX); // classpath:
-        System.out.println(ApplicationContext.FACTORY_BEAN_PREFIX); // &
         System.out.println(ConfigurableBeanFactory.SCOPE_PROTOTYPE); // prototype
         System.out.println(ConfigurableBeanFactory.SCOPE_SINGLETON); // singleton
         System.out.println(ConfigurableBeanFactory.FACTORY_BEAN_PREFIX); // &
@@ -105,7 +128,8 @@ public class MySpringCodeDictionary {
     /*
     Beans包
      */
-    @Test
+    @Ignore
+    // @Test
     public void beans() {
         System.out.println(MethodInvocationException.ERROR_CODE); // methodInvocation
         System.out.println(PropertyAccessor.NESTED_PROPERTY_SEPARATOR); // "."
@@ -127,8 +151,85 @@ public class MySpringCodeDictionary {
         System.out.println(CustomBooleanEditor.VALUE_ON); // on
         System.out.println(ResourceBundleEditor.BASE_NAME_SEPARATOR); // "_"
         System.out.println(StringArrayPropertyEditor.DEFAULT_SEPARATOR); // ","
-        // TODO package factory
+        System.out.println(BeanFactoryUtils.GENERATED_BEAN_NAME_SEPARATOR); // #
+        System.out.println(BeanDefinition.ROLE_APPLICATION); // 0
+        System.out.println(BeanDefinition.ROLE_INFRASTRUCTURE); // 2
+        System.out.println(BeanDefinition.ROLE_SUPPORT); // 1
+        System.out.println(BeanDefinition.SCOPE_PROTOTYPE);
+        System.out.println(BeanDefinition.SCOPE_SINGLETON);
+        System.out.println(PropertyOverrideConfigurer.DEFAULT_BEAN_NAME_SEPARATOR); // "."
+        System.out.println(AbstractBeanDefinition.SCOPE_DEFAULT); // ""
+        System.out.println(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR); // 3
+        System.out.println(AutowireCandidateQualifier.VALUE_KEY); // value
+        System.out.println(BeanDefinitionReaderUtils.GENERATED_BEAN_NAME_SEPARATOR); // "#"
+        System.out.println(PropertiesBeanDefinitionReader.ABSTRACT_KEY); // (abstract)
+        System.out.println(PropertiesBeanDefinitionReader.CLASS_KEY); // (class)
+        System.out.println(PropertiesBeanDefinitionReader.CONSTRUCTOR_ARG_PREFIX); // "$"
+        System.out.println(PropertiesBeanDefinitionReader.LAZY_INIT_KEY); // (lazy-init)
+        System.out.println(PropertiesBeanDefinitionReader.PARENT_KEY); // (parent)
+        System.out.println(PropertiesBeanDefinitionReader.REF_PREFIX); // "*"
+        System.out.println(PropertiesBeanDefinitionReader.REF_SUFFIX); // (ref)
+        System.out.println(PropertiesBeanDefinitionReader.SCOPE_KEY); // (scope)
+        System.out.println(PropertiesBeanDefinitionReader.SEPARATOR); // "."
+        System.out.println(PropertiesBeanDefinitionReader.SINGLETON_KEY); // (singleton)
+        System.out.println(PropertiesBeanDefinitionReader.TRUE_VALUE); // "true"
+        System.out.println(BeanWiringInfo.AUTOWIRE_BY_NAME); // 1
+        System.out.println(BeanWiringInfo.AUTOWIRE_BY_TYPE); // 2
+        System.out.println(AbstractBeanDefinitionParser.ID_ATTRIBUTE); // id
+        System.out.println(AbstractBeanDefinitionParser.NAME_ATTRIBUTE); // name
+        System.out.println(DefaultBeanDefinitionDocumentReader.ALIAS_ATTRIBUTE); //alias
+        System.out.println(DefaultBeanDefinitionDocumentReader.ALIAS_ELEMENT); // alias
+        System.out.println(DefaultBeanDefinitionDocumentReader.BEAN_ELEMENT); // bean
+        System.out.println(DefaultBeanDefinitionDocumentReader.IMPORT_ELEMENT); // import
+        System.out.println(DefaultBeanDefinitionDocumentReader.NAME_ATTRIBUTE); // name
+        System.out.println(DefaultBeanDefinitionDocumentReader.NESTED_BEANS_ELEMENT); // beans
+        System.out.println(DefaultBeanDefinitionDocumentReader.PROFILE_ATTRIBUTE); // profile
+        System.out.println(DefaultBeanDefinitionDocumentReader.RESOURCE_ATTRIBUTE); // resource
+        System.out.println(DefaultNamespaceHandlerResolver.DEFAULT_HANDLER_MAPPINGS_LOCATION); // META-INF/spring.handlers
+        System.out.println(DelegatingEntityResolver.DTD_SUFFIX); // .dtd
+        System.out.println(DelegatingEntityResolver.XSD_SUFFIX); // .xsd
+        System.out.println(PluggableSchemaResolver.DEFAULT_SCHEMA_MAPPINGS_LOCATION); // META-INF/spring.schemas
+    }
 
+    /*
+    Context包
+     */
+    @Test
+    public void context() {
+        System.out.println(ApplicationContext.CLASSPATH_ALL_URL_PREFIX); // classpath*:
+        System.out.println(ApplicationContext.CLASSPATH_URL_PREFIX); // classpath:
+        System.out.println(ApplicationContext.FACTORY_BEAN_PREFIX); // &
+        System.out.println(CacheManagementConfigUtils.CACHE_ADVISOR_BEAN_NAME); // org.springframework.cache.config.internalCacheAdvisor
+        System.out.println(DefaultKeyGenerator.NO_PARAM_KEY); // 0
+        System.out.println(DefaultKeyGenerator.NULL_PARAM_KEY); // 53
+        System.out.println(ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS); // ",; \t\n"
+        System.out.println(ConfigurableApplicationContext.CONVERSION_SERVICE_BEAN_NAME); // conversionService
+        System.out.println(ConfigurableApplicationContext.ENVIRONMENT_BEAN_NAME); // environment
+        System.out.println(ConfigurableApplicationContext.LOAD_TIME_WEAVER_BEAN_NAME); // loadTimeWeaver
+        System.out.println(ConfigurableApplicationContext.SYSTEM_ENVIRONMENT_BEAN_NAME); // systemEnvironment
+        System.out.println(ContextJndiBeanFactoryLocator.BEAN_FACTORY_PATH_DELIMITERS); // ",; \t\n"
+        System.out.println(ContextJndiBeanFactoryLocator.CONTAINER_PREFIX); // "java:comp/env/"
+        System.out.println(AdviceModeImportSelector.DEFAULT_ADVICE_MODE_ATTRIBUTE_NAME); // mode
+        System.out.println(StandardBeanExpressionResolver.DEFAULT_EXPRESSION_PREFIX); // "#{"
+        System.out.println(StandardBeanExpressionResolver.DEFAULT_EXPRESSION_SUFFIX); // "}"
+        System.out.println(AbstractApplicationContext.APPLICATION_EVENT_MULTICASTER_BEAN_NAME); //applicationEventMulticaster
+        System.out.println(AbstractApplicationContext.LIFECYCLE_PROCESSOR_BEAN_NAME); // lifecycleProcessor
+        System.out.println(AbstractApplicationContext.MESSAGE_SOURCE_BEAN_NAME); // messageSource
+        System.out.println(LiveBeansView.MBEAN_APPLICATION_KEY); // application
+        System.out.println(PropertySourcesPlaceholderConfigurer.ENVIRONMENT_PROPERTIES_PROPERTY_SOURCE_NAME); // environmentProperties
+        System.out.println(PropertySourcesPlaceholderConfigurer.LOCAL_PROPERTIES_PROPERTY_SOURCE_NAME); // localProperties
+        System.out.println(AspectJWeavingEnabler.ASPECTJ_AOP_XML_RESOURCE); // META-INF/aop.xml
+        System.out.println(ShadowingClassLoader.DEFAULT_EXCLUDED_PACKAGES); // "java.", "javax.", "sun.", "oracle.", "com.sun.", "com.ibm.", "COM.ibm.", "org.w3c.", "org.xml.", "org.dom4j.", "org.eclipse", "org.aspectj.", "net.sf.cglib", "org.springframework.cglib", "org.apache.xerces.", "org.apache.commons.logging."
+        System.out.println(ConnectorServerFactoryBean.DEFAULT_SERVICE_URL); // service:jmx:jmxmp://localhost:9875
+        System.out.println(JmxUtils.IDENTITY_OBJECT_NAME_KEY); // identity
+        System.out.println(JndiLocatorSupport.CONTAINER_PREFIX); // "java/comp/env"
+        System.out.println(RemoteInvocationSerializingExporter.CONTENT_TYPE_SERIALIZED_OBJECT); // application/x-java-serialized-object
+        System.out.println(AsyncAnnotationBeanPostProcessor.DEFAULT_TASK_EXECUTOR_BEAN_NAME); // taskExecutor
+        System.out.println(ScheduledAnnotationBeanPostProcessor.DEFAULT_TASK_SCHEDULER_BEAN_NAME); // taskScheduler
+        System.out.println(DataBinder.DEFAULT_OBJECT_NAME); // target
+        System.out.println(DataBinder.DEFAULT_AUTO_GROW_COLLECTION_LIMIT); // 256
+        System.out.println(DefaultBindingErrorProcessor.MISSING_FIELD_ERROR_CODE); // required
+        System.out.println(Errors.NESTED_PATH_SEPARATOR); // "."
     }
 
 }
