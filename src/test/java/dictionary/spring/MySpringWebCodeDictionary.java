@@ -1,4 +1,4 @@
-package spring.dictionary;
+package dictionary.spring;
 
 import org.junit.Ignore;
 import org.junit.Test;
