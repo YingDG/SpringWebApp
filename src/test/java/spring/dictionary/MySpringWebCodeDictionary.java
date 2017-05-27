@@ -1,5 +1,6 @@
 package spring.dictionary;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,24 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.jsf.DelegatingNavigationHandlerProxy;
 import org.springframework.web.jsf.el.WebApplicationContextFacesELResolver;
 import org.springframework.web.multipart.support.MultipartFilter;
+import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.FrameworkServlet;
+import org.springframework.web.servlet.ResourceServlet;
+import org.springframework.web.servlet.config.*;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMethodMappingNamingStrategy;
+import org.springframework.web.servlet.resource.CachingResourceResolver;
+import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
+import org.springframework.web.servlet.support.RequestContext;
+import org.springframework.web.servlet.support.WebContentGenerator;
+import org.springframework.web.servlet.tags.BindErrorsTag;
+import org.springframework.web.servlet.tags.BindTag;
+import org.springframework.web.servlet.tags.MessageTag;
+import org.springframework.web.servlet.tags.NestedPathTag;
+import org.springframework.web.servlet.theme.AbstractThemeResolver;
+import org.springframework.web.servlet.theme.CookieThemeResolver;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.Log4jWebConfigurer;
 import org.springframework.web.util.TagUtils;
@@ -38,7 +57,8 @@ public class MySpringWebCodeDictionary {
     /*
     web包
      */
-    @Test
+    @Ignore
+    // @Test
     public void web() {
         // HttpHeaders
         System.out.println(HttpHeaders.ACCEPT); // accept
@@ -110,6 +130,45 @@ public class MySpringWebCodeDictionary {
         System.out.println(TagUtils.SCOPE_REQUEST); // request
         System.out.println(TagUtils.SCOPE_SESSION); // session
         System.out.println(WebUtils.DEFAULT_CHARACTER_ENCODING); // ISO-8859-1
+    }
+
+    /*
+    webmvc包
+     */
+    @Test
+    public void webmvc() {
+        // DispatcherServlet
+        System.out.println(DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME); // multipartResolver
+        System.out.println(DispatcherServlet.LOCALE_RESOLVER_BEAN_NAME); // localeResolver
+        System.out.println(FrameworkServlet.DEFAULT_NAMESPACE_SUFFIX); // -servlet
+        System.out.println(ResourceServlet.RESOURCE_PARAM_NAME); // resource
+        System.out.println(FreeMarkerConfigurerBeanDefinitionParser.BEAN_NAME); // mvcFreeMarkerConfigurer
+        System.out.println(GroovyMarkupConfigurerBeanDefinitionParser.BEAN_NAME); // mvcGroovyMarkupConfigurer
+        System.out.println(ScriptTemplateConfigurerBeanDefinitionParser.BEAN_NAME); // mvcScriptTemplateConfigurer
+        System.out.println(TilesConfigurerBeanDefinitionParser.BEAN_NAME); // mvcTilesConfigurer
+        System.out.println(VelocityConfigurerBeanDefinitionParser.BEAN_NAME); // mvcVelocityConfigurer
+        System.out.println(ViewResolversBeanDefinitionParser.VIEW_RESOLVER_BEAN_NAME); // mvcViewResolver
+        System.out.println(SimpleMappingExceptionResolver.DEFAULT_EXCEPTION_ATTRIBUTE); // exception
+        System.out.println(LocaleChangeInterceptor.DEFAULT_PARAM_NAME); // locale
+        System.out.println(RequestMappingInfoHandlerMethodMappingNamingStrategy.SEPARATOR); // #
+        System.out.println(CachingResourceResolver.RESOLVED_RESOURCE_CACHE_KEY_PREFIX); // resolvedResource:
+        System.out.println(CachingResourceResolver.RESOLVED_URL_PATH_CACHE_KEY_PREFIX); // resolvedUrlPath:
+        System.out.println(AbstractDispatcherServletInitializer.DEFAULT_SERVLET_NAME); // dispatcher
+        System.out.println(RequestContext.DEFAULT_THEME_NAME); // theme
+        System.out.println(WebContentGenerator.METHOD_GET); // GET
+        System.out.println(WebContentGenerator.METHOD_HEAD); // HEAD
+        System.out.println(WebContentGenerator.METHOD_POST); // POST
+        System.out.println(BindErrorsTag.ERRORS_VARIABLE_NAME); // errors
+        System.out.println(BindTag.STATUS_VARIABLE_NAME); // status
+        System.out.println(MessageTag.DEFAULT_ARGUMENT_SEPARATOR); // ","
+        System.out.println(NestedPathTag.NESTED_PATH_VARIABLE_NAME); // nestedPath
+        // TODO, spring-webmvc-4.3.5.RELEASE.jar!\org\springframework\web\servlet\tags\form
+
+        System.out.println(AbstractThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); //theme
+        System.out.println(CookieThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); // theme
+        System.out.println(ThemeChangeInterceptor.DEFAULT_PARAM_NAME); // theme
+        // TODO, spring-webmvc-4.3.5.RELEASE.jar!\org\springframework\web\servlet\view
+
     }
 
 }
