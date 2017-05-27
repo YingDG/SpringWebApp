@@ -1,4 +1,4 @@
-package spring;
+package spring.dictionary;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,9 +43,16 @@ import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.jmx.support.JmxUtils;
 import org.springframework.jndi.JndiLocatorSupport;
+import org.springframework.mock.env.MockPropertySource;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.portlet.MockBaseURL;
+import org.springframework.mock.web.portlet.MockPortletURL;
 import org.springframework.remoting.rmi.RemoteInvocationSerializingExporter;
 import org.springframework.scheduling.annotation.AsyncAnnotationBeanPostProcessor;
 import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
+import org.springframework.test.context.cache.ContextCache;
+import org.springframework.test.context.support.TestPropertySourceUtils;
+import org.springframework.test.context.transaction.TestContextTransactionUtils;
 import org.springframework.transaction.HeuristicCompletionException;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
@@ -118,6 +125,7 @@ public class MySpringCodeDictionary {
         System.out.println(ResourceUtils.URL_PROTOCOL_ZIP); // zip
         System.out.println(ResourceUtils.WAR_URL_PREFIX); // war:
         String spring = "spring";
+        // 序列化工具类
         byte[] serialize = SerializationUtils.serialize(spring);
         System.out.println(SerializationUtils.deserialize(serialize));
         System.out.println(SocketUtils.PORT_RANGE_MIN); // 1024
@@ -275,7 +283,8 @@ public class MySpringCodeDictionary {
     /*
     tx包
      */
-    @Test
+    @Ignore
+    // @Test
     public void tx() {
         System.out.println(SpringContextResourceAdapter.DEFAULT_CONTEXT_CONFIG_LOCATION); // META-INF/applicationContext.xml
         System.out.println(HeuristicCompletionException.STATE_UNKNOWN); // 0
@@ -297,6 +306,26 @@ public class MySpringCodeDictionary {
         System.out.println(DefaultTransactionDefinition.PREFIX_PROPAGATION); // PROPAGATION_
         System.out.println(DefaultTransactionDefinition.PREFIX_TIMEOUT); // timeout_
         System.out.println(DefaultTransactionDefinition.READ_ONLY_MARKER); // readOnly
+    }
+
+    /*
+    test包
+     */
+    @Test
+    public void test() {
+        System.out.println(MockPropertySource.MOCK_PROPERTIES_PROPERTY_SOURCE_NAME); // mockProperties
+        System.out.println(MockHttpSession.SESSION_COOKIE_NAME); // JSESSION
+        System.out.println(MockBaseURL.URL_TYPE_ACTION); // action
+        System.out.println(MockBaseURL.URL_TYPE_RENDER); // render
+        System.out.println(MockPortletURL.URL_TYPE_ACTION); // action
+        System.out.println(MockPortletURL.URL_TYPE_RENDER); // render
+        System.out.println(ContextCache.DEFAULT_MAX_CONTEXT_CACHE_SIZE); // 32
+        System.out.println(TestPropertySourceUtils.INLINED_PROPERTIES_PROPERTY_SOURCE_NAME); // Inlined Test Properties
+        System.out.println(TestContextTransactionUtils.DEFAULT_DATA_SOURCE_NAME); // dataSource
+        System.out.println(TestContextTransactionUtils.DEFAULT_TRANSACTION_MANAGER_NAME); // transactionManager
+        // JdbcTestUtils工具类可操作数据源
+        // AopTestUtils
+
     }
 
 }
