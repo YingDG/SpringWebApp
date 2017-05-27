@@ -37,6 +37,8 @@ import org.springframework.core.OverridingClassLoader;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.support.LocalizedResourceHelper;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
+import org.springframework.expression.spel.ast.Selection;
+import org.springframework.expression.spel.ast.TypeCode;
 import org.springframework.instrument.classloading.ShadowingClassLoader;
 import org.springframework.jca.context.SpringContextResourceAdapter;
 import org.springframework.jdbc.support.DatabaseStartupValidator;
@@ -74,8 +76,8 @@ public class MySpringCodeDictionary {
     /*
     Core包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void core() throws InterruptedException {
         System.out.println(ConfigurableBeanFactory.SCOPE_PROTOTYPE); // prototype
         System.out.println(ConfigurableBeanFactory.SCOPE_SINGLETON); // singleton
@@ -149,8 +151,8 @@ public class MySpringCodeDictionary {
     /*
     Beans包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void beans() {
         System.out.println(MethodInvocationException.ERROR_CODE); // methodInvocation
         System.out.println(PropertyAccessor.NESTED_PROPERTY_SEPARATOR); // "."
@@ -215,8 +217,8 @@ public class MySpringCodeDictionary {
     /*
     Context包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void context() {
         System.out.println(ApplicationContext.CLASSPATH_ALL_URL_PREFIX); // classpath*:
         System.out.println(ApplicationContext.CLASSPATH_URL_PREFIX); // classpath:
@@ -257,16 +259,23 @@ public class MySpringCodeDictionary {
     /*
     expression包
      */
+    // @Ignore
     @Test
     public void expression() {
-
+        System.out.println(Selection.ALL); // 0
+        System.out.println(Selection.FIRST); // 1
+        System.out.println(Selection.LAST); // 2
+        // TypeCode
+        System.out.println(TypeCode.BOOLEAN);
+        System.out.println(TypeCode.DOUBLE); // DOUBLE
+        System.out.println(TypeCode.OBJECT);
     }
 
     /*
     aop包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void aop() {
         System.out.println(AopNamespaceUtils.PROXY_TARGET_CLASS_ATTRIBUTE); // proxy-target-class
         System.out.println(ProxyFactoryBean.GLOBAL_SUFFIX); // "*"
@@ -280,8 +289,8 @@ public class MySpringCodeDictionary {
     /*
     jdbc包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void jdbc() {
         System.out.println(DatabaseStartupValidator.DEFAULT_INTERVAL); // 1
         System.out.println(DatabaseStartupValidator.DEFAULT_TIMEOUT); // 60
@@ -291,8 +300,8 @@ public class MySpringCodeDictionary {
     /*
     tx包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void tx() {
         System.out.println(SpringContextResourceAdapter.DEFAULT_CONTEXT_CONFIG_LOCATION); // META-INF/applicationContext.xml
         System.out.println(HeuristicCompletionException.STATE_UNKNOWN); // 0
@@ -319,8 +328,8 @@ public class MySpringCodeDictionary {
     /*
     test包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void test() {
         System.out.println(MockPropertySource.MOCK_PROPERTIES_PROPERTY_SOURCE_NAME); // mockProperties
         System.out.println(MockHttpSession.SESSION_COOKIE_NAME); // JSESSION
