@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.AbstractGenericHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
@@ -105,13 +107,17 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
      用于处理 application/json 类型的 mediaType, 并添加了 application/xml 转 json 的支持
     */
     @Bean
-    public MappingJackson2HttpMessageConverter jacksonConverter() {
+    public AbstractGenericHttpMessageConverter jacksonConverter() {
         List<org.springframework.http.MediaType> mediaTypes = new ArrayList<>();
         // mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
         mediaTypes.add(MediaType.APPLICATION_JSON);
 
+        // Jackson2
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(mediaTypes);
+        // Gson
+//        GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
+
         return converter;
     }
 

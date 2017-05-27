@@ -255,6 +255,14 @@ public class MySpringCodeDictionary {
     }
 
     /*
+    expression包
+     */
+    @Test
+    public void expression() {
+
+    }
+
+    /*
     aop包
      */
     @Ignore
@@ -311,7 +319,8 @@ public class MySpringCodeDictionary {
     /*
     test包
      */
-    @Test
+    @Ignore
+    // @Test
     public void test() {
         System.out.println(MockPropertySource.MOCK_PROPERTIES_PROPERTY_SOURCE_NAME); // mockProperties
         System.out.println(MockHttpSession.SESSION_COOKIE_NAME); // JSESSION
@@ -325,7 +334,6 @@ public class MySpringCodeDictionary {
         System.out.println(TestContextTransactionUtils.DEFAULT_TRANSACTION_MANAGER_NAME); // transactionManager
         // JdbcTestUtils工具类可操作数据源
         // AopTestUtils
-
     }
 
 }
