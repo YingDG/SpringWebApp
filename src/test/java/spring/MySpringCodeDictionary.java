@@ -2,6 +2,10 @@ package spring;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.aop.config.AopNamespaceUtils;
+import org.springframework.aop.framework.ProxyFactoryBean;
+import org.springframework.aop.framework.autoproxy.target.QuickTargetSourceCreator;
+import org.springframework.aop.interceptor.CustomizableTraceInterceptor;
 import org.springframework.beans.MethodInvocationException;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.TypeMismatchException;
@@ -34,12 +38,21 @@ import org.springframework.core.env.StandardEnvironment;
 import org.springframework.core.io.support.LocalizedResourceHelper;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.instrument.classloading.ShadowingClassLoader;
+import org.springframework.jca.context.SpringContextResourceAdapter;
+import org.springframework.jdbc.support.DatabaseStartupValidator;
 import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.jmx.support.JmxUtils;
 import org.springframework.jndi.JndiLocatorSupport;
 import org.springframework.remoting.rmi.RemoteInvocationSerializingExporter;
 import org.springframework.scheduling.annotation.AsyncAnnotationBeanPostProcessor;
 import org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor;
+import org.springframework.transaction.HeuristicCompletionException;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
+import org.springframework.transaction.jta.JtaTransactionManager;
+import org.springframework.transaction.jta.WebSphereUowTransactionManager;
+import org.springframework.transaction.support.AbstractPlatformTransactionManager;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.*;
 import org.springframework.util.xml.DomUtils;
 import org.springframework.validation.DataBinder;
@@ -194,7 +207,8 @@ public class MySpringCodeDictionary {
     /*
     Context包
      */
-    @Test
+    @Ignore
+    // @Test
     public void context() {
         System.out.println(ApplicationContext.CLASSPATH_ALL_URL_PREFIX); // classpath*:
         System.out.println(ApplicationContext.CLASSPATH_URL_PREFIX); // classpath:
@@ -230,6 +244,59 @@ public class MySpringCodeDictionary {
         System.out.println(DataBinder.DEFAULT_AUTO_GROW_COLLECTION_LIMIT); // 256
         System.out.println(DefaultBindingErrorProcessor.MISSING_FIELD_ERROR_CODE); // required
         System.out.println(Errors.NESTED_PATH_SEPARATOR); // "."
+    }
+
+    /*
+    aop包
+     */
+    @Ignore
+    // @Test
+    public void aop() {
+        System.out.println(AopNamespaceUtils.PROXY_TARGET_CLASS_ATTRIBUTE); // proxy-target-class
+        System.out.println(ProxyFactoryBean.GLOBAL_SUFFIX); // "*"
+        System.out.println(QuickTargetSourceCreator.PREFIX_COMMONS_POOL); // ":"
+        System.out.println(QuickTargetSourceCreator.PREFIX_PROTOTYPE); // "!"
+        System.out.println(QuickTargetSourceCreator.PREFIX_THREAD_LOCAL); // "%"
+        System.out.println(CustomizableTraceInterceptor.PLACEHOLDER_ARGUMENT_TYPES); // $[argumentTypes]
+
+    }
+
+    /*
+    jdbc包
+     */
+    @Ignore
+    // @Test
+    public void jdbc() {
+        System.out.println(DatabaseStartupValidator.DEFAULT_INTERVAL); // 1
+        System.out.println(DatabaseStartupValidator.DEFAULT_TIMEOUT); // 60
+
+    }
+
+    /*
+    tx包
+     */
+    @Test
+    public void tx() {
+        System.out.println(SpringContextResourceAdapter.DEFAULT_CONTEXT_CONFIG_LOCATION); // META-INF/applicationContext.xml
+        System.out.println(HeuristicCompletionException.STATE_UNKNOWN); // 0
+        System.out.println(HeuristicCompletionException.STATE_COMMITTED); // 1
+        System.out.println(HeuristicCompletionException.STATE_ROLLED_BACK); // 2
+        System.out.println(HeuristicCompletionException.STATE_MIXED); // 3
+        // 用于声明式事务注解中
+        System.out.println(TransactionDefinition.ISOLATION_DEFAULT); // -1
+        System.out.println(TransactionDefinition.ISOLATION_SERIALIZABLE); // 8
+        System.out.println(RuleBasedTransactionAttribute.PREFIX_COMMIT_RULE); // "+"
+        System.out.println(RuleBasedTransactionAttribute.PREFIX_ROLLBACK_RULE); // "-"
+        System.out.println(JtaTransactionManager.DEFAULT_TRANSACTION_SYNCHRONIZATION_REGISTRY_NAME); // java:comp/TransactionSynchronizationRegistry
+        System.out.println(JtaTransactionManager.DEFAULT_USER_TRANSACTION_NAME); // java:comp/UserTransaction
+        System.out.println(WebSphereUowTransactionManager.DEFAULT_UOW_MANAGER_NAME); // java:comp/websphere/UOWManager
+        System.out.println(AbstractPlatformTransactionManager.SYNCHRONIZATION_ALWAYS); // 0
+        System.out.println(AbstractPlatformTransactionManager.SYNCHRONIZATION_ON_ACTUAL_TRANSACTION); // 1
+        System.out.println(AbstractPlatformTransactionManager.SYNCHRONIZATION_NEVER); // 2
+        System.out.println(DefaultTransactionDefinition.PREFIX_ISOLATION); // ISOLATION_
+        System.out.println(DefaultTransactionDefinition.PREFIX_PROPAGATION); // PROPAGATION_
+        System.out.println(DefaultTransactionDefinition.PREFIX_TIMEOUT); // timeout_
+        System.out.println(DefaultTransactionDefinition.READ_ONLY_MARKER); // readOnly
     }
 
 }
