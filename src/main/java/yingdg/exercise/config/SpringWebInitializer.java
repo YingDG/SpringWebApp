@@ -52,5 +52,4 @@ public class SpringWebInitializer extends AbstractAnnotationConfigDispatcherServ
                 new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
     }
 
-
 }
