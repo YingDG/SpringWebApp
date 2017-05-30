@@ -45,6 +45,14 @@ import org.springframework.web.servlet.tags.form.*;
 import org.springframework.web.servlet.theme.AbstractThemeResolver;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
+import org.springframework.web.servlet.view.*;
+import org.springframework.web.servlet.view.feed.AbstractAtomFeedView;
+import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.springframework.web.servlet.view.script.ScriptTemplateView;
+import org.springframework.web.servlet.view.velocity.VelocityLayoutView;
+import org.springframework.web.servlet.view.xml.MappingJackson2XmlView;
+import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.CookieGenerator;
 import org.springframework.web.util.Log4jWebConfigurer;
 import org.springframework.web.util.TagUtils;
@@ -196,8 +204,22 @@ public class MySpringWebCodeDictionary {
         System.out.println(AbstractThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); //theme
         System.out.println(CookieThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); // theme
         System.out.println(ThemeChangeInterceptor.DEFAULT_PARAM_NAME); // theme
-        // TODO, spring-webmvc-4.3.5.RELEASE.jar!\org\springframework\web\servlet\view
-
+        System.out.println(AbstractCachingViewResolver.DEFAULT_CACHE_LIMIT); // 1024
+        System.out.println(AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE); // springMacroRequestContext
+        System.out.println(AbstractView.DEFAULT_CONTENT_TYPE); // text/html;charset=ISO-8859-1
+        System.out.println(UrlBasedViewResolver.FORWARD_URL_PREFIX); // forward:
+        System.out.println(UrlBasedViewResolver.REDIRECT_URL_PREFIX); // redirect:
+        System.out.println(XmlViewResolver.DEFAULT_LOCATION); // /WEB-INF/views.xml
+        System.out.println(AbstractAtomFeedView.DEFAULT_FEED_TYPE); // atom_1.0
+        System.out.println(JasperReportsMultiFormatView.DEFAULT_FORMAT_KEY); // format
+        System.out.println(MappingJackson2JsonView.DEFAULT_CONTENT_TYPE); // application/json
+        System.out.println(MappingJackson2JsonView.DEFAULT_JSONP_CONTENT_TYPE); // application/javascript
+        System.out.println(ScriptTemplateView.DEFAULT_CONTENT_TYPE); // text/html
+        System.out.println(VelocityLayoutView.DEFAULT_LAYOUT_KEY); // layout
+        System.out.println(VelocityLayoutView.DEFAULT_LAYOUT_URL); // layout.vm
+        System.out.println(VelocityLayoutView.DEFAULT_SCREEN_CONTENT_KEY); // screen_content
+        System.out.println(MappingJackson2XmlView.DEFAULT_CONTENT_TYPE); // application/xml
+        System.out.println(MarshallingView.DEFAULT_CONTENT_TYPE); // application/xml
     }
 
 }
