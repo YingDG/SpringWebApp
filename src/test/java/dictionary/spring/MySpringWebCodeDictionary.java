@@ -41,6 +41,7 @@ import org.springframework.web.servlet.tags.BindErrorsTag;
 import org.springframework.web.servlet.tags.BindTag;
 import org.springframework.web.servlet.tags.MessageTag;
 import org.springframework.web.servlet.tags.NestedPathTag;
+import org.springframework.web.servlet.tags.form.*;
 import org.springframework.web.servlet.theme.AbstractThemeResolver;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
@@ -162,8 +163,36 @@ public class MySpringWebCodeDictionary {
         System.out.println(BindTag.STATUS_VARIABLE_NAME); // status
         System.out.println(MessageTag.DEFAULT_ARGUMENT_SEPARATOR); // ","
         System.out.println(NestedPathTag.NESTED_PATH_VARIABLE_NAME); // nestedPath
-        // TODO, spring-webmvc-4.3.5.RELEASE.jar!\org\springframework\web\servlet\tags\form
-
+        // AbstractHtmlElementTag
+        System.out.println(AbstractHtmlElementTag.CLASS_ATTRIBUTE); // class
+        System.out.println(AbstractHtmlElementTag.DIR_ATTRIBUTE); // dir
+        System.out.println(AbstractHtmlElementTag.LANG_ATTRIBUTE); // lang
+        System.out.println(AbstractHtmlElementTag.ONCLICK_ATTRIBUTE); // onclick
+        System.out.println(AbstractHtmlElementTag.ONDBLCLICK_ATTRIBUTE);
+        System.out.println(AbstractHtmlElementTag.ONKEYDOWN_ATTRIBUTE); // onkeydown
+        System.out.println(AbstractHtmlElementTag.ONKEYPRESS_ATTRIBUTE); // onkeypress
+        System.out.println(AbstractHtmlElementTag.ONMOUSEDOWN_ATTRIBUTE); // onmousedown
+        System.out.println(AbstractHtmlElementTag.STYLE_ATTRIBUTE); // style
+        System.out.println(AbstractHtmlElementTag.TITLE_ATTRIBUTE); // title
+        System.out.println(AbstractHtmlInputElementTag.ACCESSKEY_ATTRIBUTE); // accesskey
+        System.out.println(AbstractHtmlInputElementTag.DISABLED_ATTRIBUTE); // disabled
+        System.out.println(AbstractHtmlInputElementTag.ONBLUR_ATTRIBUTE); // onblur
+        System.out.println(AbstractHtmlInputElementTag.ONCHANGE_ATTRIBUTE); // onchange
+        System.out.println(AbstractHtmlInputElementTag.READONLY_ATTRIBUTE); // readonly
+        System.out.println(ButtonTag.DISABLED_ATTRIBUTE); // disabled
+        System.out.println(FormTag.DEFAULT_COMMAND_NAME); // command
+        System.out.println(HiddenInputTag.DISABLED_ATTRIBUTE);
+        // InputTag
+        System.out.println(InputTag.ALT_ATTRIBUTE); // alt
+        System.out.println(InputTag.AUTOCOMPLETE_ATTRIBUTE); // autocomplete
+        System.out.println(InputTag.MAXLENGTH_ATTRIBUTE); // maxlength
+        System.out.println(InputTag.ONSELECT_ATTRIBUTE); // onselect
+        System.out.println(OptionTag.DISPLAY_VALUE_VARIABLE_NAME); // displayValue
+        System.out.println(OptionTag.VALUE_VARIABLE_NAME); // value
+        System.out.println(TextareaTag.COLS_ATTRIBUTE); // cols
+        System.out.println(TextareaTag.ROWS_ATTRIBUTE); // rows
+        System.out.println(TextareaTag.ONSELECT_ATTRIBUTE); // onselect
+        System.out.println(TextareaTag.READONLY_ATTRIBUTE); // readonly
         System.out.println(AbstractThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); //theme
         System.out.println(CookieThemeResolver.ORIGINAL_DEFAULT_THEME_NAME); // theme
         System.out.println(ThemeChangeInterceptor.DEFAULT_PARAM_NAME); // theme
