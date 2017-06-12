@@ -26,14 +26,16 @@ public class HelloValidator {
         if (!validateInfo.isEmpty()) {
             System.out.println("校验不通过！");
             System.out.println(validateInfo);
+
+            for (ConstraintViolation constraintViolation : validateInfo) {
+                // 异常类
+                System.out.println("异常类：" + constraintViolation.getRootBeanClass().getName());
+                // 异常属性
+                System.out.println("属性：" + constraintViolation.getPropertyPath());
+                // 异常信息
+                System.out.println("校验信息：" + constraintViolation.getMessage());
+            }
         }
-        for (ConstraintViolation constraintViolation : validateInfo) {
-            // 异常类
-            System.out.println("异常类：" + constraintViolation.getRootBeanClass().getName());
-            // 异常属性
-            System.out.println("属性：" + constraintViolation.getPropertyPath());
-            // 异常信息
-            System.out.println("校验信息：" + constraintViolation.getMessage());
-        }
+
     }
 }
