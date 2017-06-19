@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractGenericHttpMessageConverter;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -100,6 +101,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(jacksonConverter());
+        converters.add(byteArrayConverter());
     }
 
     /*
@@ -109,12 +111,13 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public AbstractGenericHttpMessageConverter jacksonConverter() {
         List<org.springframework.http.MediaType> mediaTypes = new ArrayList<>();
-        // mediaTypes.add(org.springframework.http.MediaType.APPLICATION_XML);
+        // mediaTypes.add(MediaType.APPLICATION_XML);
         mediaTypes.add(MediaType.APPLICATION_JSON);
 
         // Jackson2
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setSupportedMediaTypes(mediaTypes);
+
         // Gson
 //        GsonHttpMessageConverter converter = new GsonHttpMessageConverter();
 
@@ -133,6 +136,14 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 //        multipartResolver.setMaxInMemorySize(0);
 
         return new StandardServletMultipartResolver();
+    }
+
+    /*
+    防止下载文件乱码
+     */
+    @Bean
+    public ByteArrayHttpMessageConverter byteArrayConverter() {
+        return new ByteArrayHttpMessageConverter();
     }
 
 //    @Bean

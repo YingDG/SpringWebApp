@@ -44,12 +44,12 @@ public class SpringWebInitializer extends AbstractAnnotationConfigDispatcherServ
 //    }
 
     /*
-    Multipart文件上传
+    Multipart文件上传缓存目录配置
      */
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setMultipartConfig(
-                new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
+                new MultipartConfigElement("E:/uploads", 2097152, 4194304, 0));
     }
 
 }
