@@ -66,8 +66,8 @@ public class MySpringWebCodeDictionary {
     /*
     web包
      */
-    @Ignore
-    // @Test
+    // @Ignore
+    @Test
     public void web() {
         // HttpHeaders
         System.out.println(HttpHeaders.ACCEPT); // accept
@@ -144,6 +144,7 @@ public class MySpringWebCodeDictionary {
     /*
     webmvc包
      */
+    // @Ignore
     @Test
     public void webmvc() {
         // DispatcherServlet
