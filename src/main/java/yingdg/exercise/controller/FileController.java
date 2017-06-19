@@ -23,9 +23,7 @@ import java.io.IOException;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 @RequestMapping(value = "/user")
 @MultipartConfig
-public class UserController {
-    @Autowired
-    private UserMapper userMapper;
+public class FileController {
 
     /*
     上传文件
