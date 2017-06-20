@@ -1,7 +1,7 @@
 package yingdg.exercise.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  * Created by yingdg on 2017/4/10.
  */
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class User {
     private int id;
 

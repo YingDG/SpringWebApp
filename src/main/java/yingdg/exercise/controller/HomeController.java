@@ -1,6 +1,6 @@
 package yingdg.exercise.controller;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,13 @@ import yingdg.exercise.repository.UserMapper;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Objects;
 
 /**
  * Created by yingdg on 2017/4/10.
  */
 @Controller
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+@Scope(BeanDefinition.SCOPE_SINGLETON)
 @RequestMapping("/")
 public class HomeController {
     @Resource
@@ -49,7 +50,13 @@ public class HomeController {
         User user = mapper.findUserById(id);
         System.out.println(user);
 
-        model.addAttribute(user);
+        if (Objects.nonNull(user)) {
+            model.addAttribute(user);
+        } else {
+            User nullUser = new User("", 0);
+            nullUser.setId(0);
+            model.addAttribute(nullUser);
+        }
         return "user";
     }
 

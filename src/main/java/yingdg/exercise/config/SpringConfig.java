@@ -1,5 +1,6 @@
 package yingdg.exercise.config;
 
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
@@ -34,7 +35,7 @@ import java.util.regex.Pattern;
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
 // 开启声明式事务
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 // Mybatis Mapper配置扫描
 @MapperScan(basePackages = "yingdg.exercise.repository")
 public class SpringConfig {
@@ -99,23 +100,36 @@ public class SpringConfig {
     配置事务管理器
      */
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
         // jdbc事务
-        return new DataSourceTransactionManager(dataSource());
+        return new DataSourceTransactionManager(dataSource);
     }
 
     /*
     配置sqlSessionFactory
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
+    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(dataSource());
+        sqlSessionFactory.setDataSource(dataSource);
 //        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
 //                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
+        // mybatis sql
+        sqlSessionFactory.setConfiguration(mybatisSql());
 
         return sqlSessionFactory;
+    }
+
+    /*
+    打印sql语句
+     */
+    @Bean
+    public org.apache.ibatis.session.Configuration mybatisSql() {
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setLogImpl(StdOutImpl.class);
+
+        return configuration;
     }
 
     // 扫描指定包以外的所有包（非必须配置）

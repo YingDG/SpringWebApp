@@ -30,7 +30,7 @@ public class FileController {
      */
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     public void uploadFile(@RequestPart("userFile") MultipartFile userFile) throws IOException {
-        // 上传文件布盘
+        // 上传文件存盘
         userFile.transferTo(new File("E:/uploads/" + new String(userFile.getOriginalFilename())));
 
         // 打印上传源文件名称，包括后缀名

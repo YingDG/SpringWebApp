@@ -3,28 +3,23 @@ package yingdg.exercise.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.AbstractGenericHttpMessageConverter;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
+import yingdg.exercise.controller.interceptor.SpringWebInterceptor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -152,5 +147,22 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
 //        contentNegotiationManagerFactoryBean.setDefaultContentType(MediaType.APPLICATION_JSON);
 //        return contentNegotiationManagerFactoryBean;
 //    }
+
+    /*
+    添加拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        super.addInterceptors(registry);
+        registry.addInterceptor(interceptor());
+    }
+
+    /*
+    自定义拦截器
+     */
+    @Bean
+    public SpringWebInterceptor interceptor() {
+        return new SpringWebInterceptor();
+    }
 
 }
