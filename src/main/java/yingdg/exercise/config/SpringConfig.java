@@ -13,10 +13,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import yingdg.exercise.config.datasource.DynamicDataSource;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -46,15 +49,49 @@ public class SpringConfig {
     配置数据源
      */
     @Bean
-    @Primary
-    // @Profile("dev")
-    public DataSource dataSource() {
+    // @Primary
+    public DataSource masterDataSource() {
         // Spring数据源管理（非连接池）
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.username"));
         dataSource.setPassword(env.getProperty("jdbc.password"));
+
+        return dataSource;
+    }
+
+    /*
+    配置数据源
+     */
+    @Bean
+    public DataSource slaveDataSource() {
+        // Spring数据源管理（非连接池）
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
+
+        return dataSource;
+    }
+
+    /*
+    自定义动态数据源，
+    以实现主从分离等业务场景
+     */
+    @Bean
+    public DataSource dataSource(DataSource masterDataSource, DataSource slaveDataSource) {
+        DynamicDataSource dataSource = new DynamicDataSource();
+
+        // 注册数据源
+        Map<Object, Object> dbMap = new HashMap<>();
+        dbMap.put("master", masterDataSource);
+        dbMap.put("slave", slaveDataSource);
+        dataSource.setTargetDataSources(dbMap);
+
+        // 配置默认数据源
+        dataSource.setDefaultTargetDataSource(masterDataSource);
 
         return dataSource;
     }

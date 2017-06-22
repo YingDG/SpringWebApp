@@ -19,7 +19,7 @@ public class SpringWebInterceptor implements HandlerInterceptor {
         String servletPath = httpServletRequest.getServletPath();
         System.out.println(servletPath);
 
-        // TODO，验证session
+        // TODO，验证session，与SSO配合可用于登录验证
         return Objects.nonNull(httpServletRequest.getSession()) ? true : false;
     }
 
