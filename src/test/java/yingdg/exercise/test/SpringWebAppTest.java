@@ -3,9 +3,12 @@ package yingdg.exercise.test;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 import yingdg.exercise.config.SpringConfig;
 import yingdg.exercise.model.User;
 import yingdg.exercise.repository.UserMapper;
@@ -19,15 +22,17 @@ import javax.annotation.Resource;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {SpringConfig.class})
 // @ActiveProfiles("dev")
+@Transactional
 public class SpringWebAppTest {
     @Resource
     private UserMapper mapper;
     @Resource
-    private User user;
+    private ApplicationContext app;
 
     @Ignore
     // @Test
     public void test() {
+        User user = app.getBean(User.class);
         user.setId(1);
         user.setUsername("zdm");
         user.setAge(25);
@@ -39,6 +44,16 @@ public class SpringWebAppTest {
     public void test3() {
         User user = mapper.findUserById(2);
         System.out.println(user);
+    }
+
+    @Test
+    @Rollback
+    public void test4() {
+        User user = new User("hello", 123);
+        int i = mapper.createUser(user);
+        if (i != 0) {
+            System.out.println(user);
+        }
     }
 
 }

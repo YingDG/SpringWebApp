@@ -1,5 +1,6 @@
 package yingdg.exercise.config;
 
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
@@ -12,10 +13,13 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import yingdg.exercise.config.datasource.DynamicDataSource;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -34,7 +38,7 @@ import java.util.regex.Pattern;
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
 // 开启声明式事务
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 // Mybatis Mapper配置扫描
 @MapperScan(basePackages = "yingdg.exercise.repository")
 public class SpringConfig {
@@ -45,15 +49,49 @@ public class SpringConfig {
     配置数据源
      */
     @Bean
-    @Primary
-    // @Profile("dev")
-    public DataSource dataSource() {
+    // @Primary
+    public DataSource masterDataSource() {
         // Spring数据源管理（非连接池）
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.username"));
         dataSource.setPassword(env.getProperty("jdbc.password"));
+
+        return dataSource;
+    }
+
+    /*
+    配置数据源
+     */
+    @Bean
+    public DataSource slaveDataSource() {
+        // Spring数据源管理（非连接池）
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
+
+        return dataSource;
+    }
+
+    /*
+    自定义动态数据源，
+    以实现主从分离等业务场景
+     */
+    @Bean
+    public DataSource dataSource(DataSource masterDataSource, DataSource slaveDataSource) {
+        DynamicDataSource dataSource = new DynamicDataSource();
+
+        // 注册数据源
+        Map<Object, Object> dbMap = new HashMap<>();
+        dbMap.put("master", masterDataSource);
+        dbMap.put("slave", slaveDataSource);
+        dataSource.setTargetDataSources(dbMap);
+
+        // 配置默认数据源
+        dataSource.setDefaultTargetDataSource(masterDataSource);
 
         return dataSource;
     }
@@ -99,23 +137,36 @@ public class SpringConfig {
     配置事务管理器
      */
     @Bean
-    public PlatformTransactionManager transactionManager() {
+    public PlatformTransactionManager transactionManager(DataSource dataSource) {
         // jdbc事务
-        return new DataSourceTransactionManager(dataSource());
+        return new DataSourceTransactionManager(dataSource);
     }
 
     /*
     配置sqlSessionFactory
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory() throws IOException {
+    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(dataSource());
+        sqlSessionFactory.setDataSource(dataSource);
 //        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
 //                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
+        // mybatis sql
+        sqlSessionFactory.setConfiguration(mybatisSql());
 
         return sqlSessionFactory;
+    }
+
+    /*
+    打印sql语句
+     */
+    @Bean
+    public org.apache.ibatis.session.Configuration mybatisSql() {
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setLogImpl(StdOutImpl.class);
+
+        return configuration;
     }
 
     // 扫描指定包以外的所有包（非必须配置）
