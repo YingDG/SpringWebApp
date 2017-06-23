@@ -153,18 +153,21 @@ public class SpringConfig {
 //        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
 //                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
         // mybatis sql
-        sqlSessionFactory.setConfiguration(mybatisSql());
+        sqlSessionFactory.setConfiguration(mybatisConfig());
 
         return sqlSessionFactory;
     }
 
     /*
-    打印sql语句
+    Mybatis自定义配置
      */
     @Bean
-    public org.apache.ibatis.session.Configuration mybatisSql() {
+    public org.apache.ibatis.session.Configuration mybatisConfig() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        // 打印sql语句
         configuration.setLogImpl(StdOutImpl.class);
+        // 插入数据时返回主键
+        // configuration.setUseGeneratedKeys(true);
 
         return configuration;
     }

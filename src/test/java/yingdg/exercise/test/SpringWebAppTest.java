@@ -56,4 +56,13 @@ public class SpringWebAppTest {
         }
     }
 
+    @Test
+    @Rollback
+    public void test5() {
+        int i = mapper.deleteUser(2);
+        if (i != 0) {
+            System.out.println("delete user");
+        }
+    }
+
 }
