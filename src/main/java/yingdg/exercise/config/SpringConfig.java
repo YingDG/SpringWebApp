@@ -150,6 +150,7 @@ public class SpringConfig {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
+//        sqlSessionFactory.setTypeAliasesPackage("yingdg.exercise.model");
 //        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
 //                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
         // mybatis sql
