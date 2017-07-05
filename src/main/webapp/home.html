@@ -35,7 +35,7 @@
     // ajax请求
     $("#test").click(function () {
         $.ajax({
-            url: "/user/4",
+            url: "./user/4",
             type: "GET",
             success: function (msg) {
                 $("#user").html(msg.id + msg.username + msg.age);

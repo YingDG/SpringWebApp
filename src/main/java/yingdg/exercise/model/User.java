@@ -29,8 +29,8 @@ public class User {
     @Min(value = 10, message = "最小10岁！")
     private int age;
     @Resource
-    @Valid
-    @NotNull
+    // @Valid
+    // @NotNull
     private UserInfo userInfo;
 
     public User() {
