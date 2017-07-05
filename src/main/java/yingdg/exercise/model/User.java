@@ -1,6 +1,7 @@
 package yingdg.exercise.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -45,24 +46,29 @@ public class User {
         return id;
     }
 
-    public void setId(int id) {
+    public final User setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    @Value("hello")
+    public final User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    @Value("20")
+    public final User setAge(int age) {
         this.age = age;
+        return this;
     }
 
     public UserInfo getUserInfo() {

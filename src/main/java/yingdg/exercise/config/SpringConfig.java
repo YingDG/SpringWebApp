@@ -1,6 +1,7 @@
 package yingdg.exercise.config;
 
 import org.apache.ibatis.logging.stdout.StdOutImpl;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.ApplicationContext;
@@ -143,10 +144,10 @@ public class SpringConfig {
     }
 
     /*
-    配置sqlSessionFactory
+    配置SqlSessionFactory
      */
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         // Mybatis SqlSession
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
@@ -156,7 +157,7 @@ public class SpringConfig {
         // mybatis sql
         sqlSessionFactory.setConfiguration(mybatisConfig());
 
-        return sqlSessionFactory;
+        return sqlSessionFactory.getObject();
     }
 
     /*
