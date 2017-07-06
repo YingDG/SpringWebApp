@@ -22,5 +22,29 @@
 
     <a href="./user/getFile/userFile_jpg">下载图片</a>
 </div>
+<button id="test">ajax</button>
+<button id="test2">clear</button>
+<div id="user"></div>
+
+<script type="text/javascript" src="./js/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+    $("#test2").click(function () {
+        $("#user").empty();
+    });
+
+    // ajax请求
+    $("#test").click(function () {
+        $.ajax({
+            url: "./user/4",
+            type: "GET",
+            success: function (msg) {
+                $("#user").html(msg.id + msg.username + msg.age);
+            },
+            error: function () {
+                alert("ajax error");
+            }
+        });
+    });
+</script>
 </body>
 </html>
