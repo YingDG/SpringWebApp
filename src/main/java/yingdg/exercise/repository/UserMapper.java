@@ -2,12 +2,14 @@ package yingdg.exercise.repository;
 
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import yingdg.exercise.model.User;
 
 /**
  * Created by yingdg on 2017/4/10.
  */
 @Repository
+@Transactional // 临时添加
 public interface UserMapper {
 
     /*
