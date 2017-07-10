@@ -1,6 +1,8 @@
 package yingdg.exercise.config;
 
+import com.github.pagehelper.PageInterceptor;
 import org.apache.ibatis.logging.stdout.StdOutImpl;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -18,9 +20,9 @@ import yingdg.exercise.config.datasource.DynamicDataSource;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
@@ -154,7 +156,18 @@ public class SpringConfig {
 //        sqlSessionFactory.setTypeAliasesPackage("yingdg.exercise.model");
 //        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(
 //                ApplicationContext.CLASSPATH_ALL_URL_PREFIX + "*Mapper.xml"));
-        // mybatis sql
+
+        // 添加分页插件
+        Properties properties = new Properties();
+        // properties.put("helperDialect", "mysql");
+        // properties.put("reasonable", true);
+        // properties.put("supportMethodsArguments", true);
+        // properties.put("closeConn", false);
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        pageInterceptor.setProperties(properties);
+        sqlSessionFactory.setPlugins(new Interceptor[]{pageInterceptor});
+
+        // mybatis sql打印
         sqlSessionFactory.setConfiguration(mybatisConfig());
 
         return sqlSessionFactory.getObject();
