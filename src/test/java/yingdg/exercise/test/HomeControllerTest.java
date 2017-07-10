@@ -33,7 +33,7 @@ public class HomeControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
         // 测试请求预期值是否匹配
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.view().name("redirect:home.html"));
+                .andExpect(MockMvcResultMatchers.view().name("redirect:./home.html"));
     }
 
 }
