@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
 
 // Spring配置类，基本+ORM
 @Configuration
-// 指定环境便于切换
+// 指定环境便于切换，可配合VM参数-Dspring.profiles.active=dev
 // @Profile("dev")
 // 开启IOC与AOP
 @ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = true, // 懒加载
