@@ -31,12 +31,13 @@ import java.util.regex.Pattern;
 
 // Spring配置类，基本+ORM
 @Configuration
-// 指定环境便于切换
+// 指定环境便于切换，可配合VM参数-Dspring.profiles.active=dev
 // @Profile("dev")
-// 开启IOC与AOP
-@ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = true, // 懒加载
+// 开启IOC
+@ComponentScan(basePackages = {"yingdg.exercise"}, lazyInit = false, // 懒加载，true时无法开启定时任务
+        // 排除例外
         excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, value = {SpringConfig.WebPackage.class})})
-// 排除例外
+// 开启AOP功能
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 // 配置文件加载
 @PropertySource({"classpath:jdbc.properties"})
@@ -44,9 +45,14 @@ import java.util.regex.Pattern;
 @EnableTransactionManagement
 // Mybatis Mapper配置扫描
 @MapperScan(basePackages = "yingdg.exercise.repository")
+// 引入多线程，定时，条件配置
+@Import({SpringTheadConfig.class, SpringSchedulingConfig.class, SpringConditionConfig.class})
 public class SpringConfig {
+    /*
+    Spring环境参数配置类
+     */
     @Resource
-    private Environment env;// Spring环境配置类
+    private Environment env;
 
     /*
     配置数据源
@@ -183,6 +189,8 @@ public class SpringConfig {
         configuration.setLogImpl(StdOutImpl.class);
         // 插入数据时返回主键
         // configuration.setUseGeneratedKeys(true);
+        // 排除null值
+        configuration.setCallSettersOnNulls(true);
 
         return configuration;
     }
