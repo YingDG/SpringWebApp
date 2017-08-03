@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import yingdg.exercise.config.SpringWebConfig;
-import yingdg.exercise.service.MyTaskExecutor;
+import yingdg.exercise.springwebapp.config.SpringWebConfig;
+import yingdg.exercise.springwebapp.service.MyTaskExecutor;
 
 import javax.annotation.Resource;
 

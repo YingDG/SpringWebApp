@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import yingdg.exercise.config.SpringConfig;
-import yingdg.exercise.service.condition.ICondition;
+import yingdg.exercise.springwebapp.config.SpringConfig;
+import yingdg.exercise.springwebapp.service.condition.ICondition;
 
 import javax.annotation.Resource;
 
