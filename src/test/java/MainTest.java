@@ -1,9 +1,8 @@
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
-import yingdg.exercise.model.User;
+import yingdg.exercise.springwebapp.model.User;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;

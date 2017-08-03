@@ -9,9 +9,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import yingdg.exercise.config.SpringConfig;
-import yingdg.exercise.model.User;
-import yingdg.exercise.repository.UserMapper;
+import yingdg.exercise.springwebapp.config.SpringConfig;
+import yingdg.exercise.springwebapp.model.User;
+import yingdg.exercise.springwebapp.repository.UserMapper;
 
 import javax.annotation.Resource;
 

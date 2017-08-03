@@ -3,8 +3,8 @@ package yingdg.exercise.test;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import yingdg.exercise.config.SpringConfig;
-import yingdg.exercise.service.alone.MyStandAloneService;
+import yingdg.exercise.springwebapp.config.SpringConfig;
+import yingdg.exercise.springwebapp.service.alone.MyStandAloneService;
 
 /**
  * Created by yingdg on 2017/7/28.
