@@ -11,7 +11,7 @@ import java.util.Date;
 @Service
 public class MyTaskScheduling {
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 5000)
     public void printInfo() {
         System.out.println("定时任务" + new Date());
     }

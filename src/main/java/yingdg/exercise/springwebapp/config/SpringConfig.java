@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import yingdg.exercise.springwebapp.config.datasource.DynamicDataSource;
+import yingdg.exercise.springwebapp.config.httpsession.SpringSessionConfig;
 import yingdg.exercise.springwebapp.config.shiro.SpringShiroConfig;
 
 import javax.annotation.Resource;
@@ -43,9 +44,9 @@ import java.util.regex.Pattern;
 @EnableTransactionManagement
 // Mybatis Mapper配置扫描
 @MapperScan(basePackages = "yingdg.exercise.springwebapp.repository")
-// 引入多线程，定时，条件，shiro安全认证配置
+// 引入多线程，定时，条件，shiro安全认证，分布式Session配置
 @Import({SpringTheadConfig.class, SpringSchedulingConfig.class, SpringConditionConfig.class,
-        SpringShiroConfig.class})
+        SpringShiroConfig.class, SpringSessionConfig.class})
 public class SpringConfig {
     /*
     Spring环境参数配置类
