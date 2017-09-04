@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.annotation.MultipartConfig;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by yingdg on 2017/5/5.
@@ -20,8 +21,9 @@ import java.io.IOException;
 @RestController
 @Scope(WebApplicationContext.SCOPE_SESSION)
 @RequestMapping(value = "/user")
-@MultipartConfig
-public class FileController {
+// 开启文件上传类
+@MultipartConfig // 不实现序列化接口，加载redis后出现异常？
+public class FileController implements Serializable {
 
     /*
     上传文件
