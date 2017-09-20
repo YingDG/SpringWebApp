@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.service.condition;
+package yingdg.exercise.springwebapp.config.condition;
 
 /**
  * Created by yingdg on 2017/7/28.

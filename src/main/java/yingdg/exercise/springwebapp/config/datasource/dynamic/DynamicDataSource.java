@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.config.datasource;
+package yingdg.exercise.springwebapp.config.datasource.dynamic;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 

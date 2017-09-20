@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.config.datasource;
+package yingdg.exercise.springwebapp.config.datasource.dynamic;
 
 /**
  * Created by yingdg on 2017/6/22.

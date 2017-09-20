@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.service;
+package yingdg.exercise.springwebapp.service.concurrency;
 
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Async;

@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import yingdg.exercise.springwebapp.config.SpringConfig;
-import yingdg.exercise.springwebapp.service.condition.ICondition;
+import yingdg.exercise.springwebapp.config.condition.ICondition;
 
 import javax.annotation.Resource;
 

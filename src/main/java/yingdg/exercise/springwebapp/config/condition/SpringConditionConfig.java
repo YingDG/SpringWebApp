@@ -1,12 +1,8 @@
-package yingdg.exercise.springwebapp.config;
+package yingdg.exercise.springwebapp.config.condition;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-import yingdg.exercise.springwebapp.service.condition.ConditionA;
-import yingdg.exercise.springwebapp.service.condition.ConditionAJudge;
-import yingdg.exercise.springwebapp.service.condition.ConditionB;
-import yingdg.exercise.springwebapp.service.condition.ConditionBJudge;
 
 /**
  * Created by yingdg on 2017/7/28.

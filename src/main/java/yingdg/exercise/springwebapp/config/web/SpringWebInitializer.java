@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.config;
+package yingdg.exercise.springwebapp.config.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
