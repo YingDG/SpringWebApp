@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import yingdg.exercise.springwebapp.config.SpringWebConfig;
+import yingdg.exercise.springwebapp.config.web.SpringWebConfig;
 import yingdg.exercise.springwebapp.controller.HomeController;
 
 import javax.annotation.Resource;

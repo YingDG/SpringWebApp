@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.config.datasource;
+package yingdg.exercise.springwebapp.config.datasource.dynamic;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.config;
+package yingdg.exercise.springwebapp.config.web;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -25,7 +25,7 @@ public class SpringWebFilter implements WebApplicationInitializer {
         FilterRegistration.Dynamic springHiddenHttpMethodFilter = servletContext.addFilter("HiddenHttpMethodFilter", hiddenHttpMethodFilter);
         springHiddenHttpMethodFilter.addMappingForUrlPatterns(null, false, "/*");
 
-        // 文件上传参数设置
+        // 文件上传参数设置（暂不需要）
 //        DispatcherServlet fileDispatcherServlet = new DispatcherServlet();
 //        ServletRegistration.Dynamic fileUploadRegistration = servletContext.addServlet("fileServlet", fileDispatcherServlet);
 //        fileUploadRegistration.addMapping("/*");

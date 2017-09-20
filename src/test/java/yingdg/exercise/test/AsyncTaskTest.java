@@ -5,8 +5,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import yingdg.exercise.springwebapp.config.SpringWebConfig;
-import yingdg.exercise.springwebapp.service.MyTaskExecutor;
+import yingdg.exercise.springwebapp.config.web.SpringWebConfig;
+import yingdg.exercise.springwebapp.service.concurrency.MyTaskExecutor;
 
 import javax.annotation.Resource;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringWebConfig.class)
-public class TaskTest {
+public class AsyncTaskTest {
     @Resource
     private MyTaskExecutor executor;
 

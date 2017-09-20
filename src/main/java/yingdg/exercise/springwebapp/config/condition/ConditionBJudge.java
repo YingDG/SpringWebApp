@@ -1,4 +1,4 @@
-package yingdg.exercise.springwebapp.service.condition;
+package yingdg.exercise.springwebapp.config.condition;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
