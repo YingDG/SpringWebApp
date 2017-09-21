@@ -22,10 +22,17 @@ public interface UserMapper {
     })
     User findUserById(@Param("id") int id);
 
+    @Select("SELECT * FROM USER WHERE USERNAME = #{username}")
+    @Results(value = {
+            @Result(column = "id", property = "id", id = true)
+    })
+    User findUserByUsername(@Param("username") String username);
+
     @Insert("INSERT INTO USER(username,age) VALUES(#{username},#{age})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int createUser(User user);
 
     @Delete("DELETE FROM USER WHERE ID = #{id}")
     int deleteUser(int id);
+
 }

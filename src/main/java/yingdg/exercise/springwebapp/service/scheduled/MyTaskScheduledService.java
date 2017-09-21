@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MyTaskScheduledService {
     private AtomicInteger i = new AtomicInteger();
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1800000)
     public void printInfo() {
         int increment = i.getAndIncrement();
         System.out.println("定时任务" + increment + ": " + new Date());

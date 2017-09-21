@@ -26,7 +26,7 @@ public class User {
     private String username;
     @NotNull
     @Min(value = 10, message = "最小10岁！")
-    private int age;
+    private Integer age;
     @Resource
     // @Valid
     // @NotNull
@@ -60,12 +60,12 @@ public class User {
         return this;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
     @Value("20")
-    public final User setAge(int age) {
+    public final User setAge(Integer age) {
         this.age = age;
         return this;
     }
