@@ -42,6 +42,7 @@ public class SpringWebFilter implements WebApplicationInitializer {
          */
         DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
         delegatingFilterProxy.setTargetFilterLifecycle(true);
+        // 注意！拦截器需要和spring配置中的ShiroFilterFactoryBean的beanname保持一致
         FilterRegistration.Dynamic shiroFilter = servletContext.addFilter("ShiroFilter", delegatingFilterProxy);
         shiroFilter.addMappingForUrlPatterns(null, false, "/*");
     }

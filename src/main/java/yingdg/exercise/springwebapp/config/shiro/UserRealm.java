@@ -18,6 +18,10 @@ import java.util.Objects;
  * Created by yingdg on 2017/9/21 0021.
  */
 public class UserRealm extends AuthorizingRealm {
+    /*
+    如果只进行认证，则继承AuthenticatingRealm
+     */
+
     // 临时用userMapper代替登录
     @Resource
     private UserMapper userMapper;
