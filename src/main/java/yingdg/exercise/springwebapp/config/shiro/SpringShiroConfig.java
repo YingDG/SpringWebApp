@@ -18,10 +18,7 @@ import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.springframework.aop.Pointcut;
-import org.springframework.aop.framework.ProxyConfig;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -36,7 +33,7 @@ import java.util.Map;
 public class SpringShiroConfig {
 
     /*
-    认证信息缓存配置
+    认证信息缓存配置（暂时不需要）
      */
 //    @Bean
 //    public CacheManager cacheManager() {
@@ -111,9 +108,9 @@ public class SpringShiroConfig {
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
         filterFactoryBean.setSecurityManager(securityManager);
         // 要求登录时的链接
-        filterFactoryBean.setLoginUrl("./loginpage");
+        filterFactoryBean.setLoginUrl("/loginpage");
         // 登录成功后要跳转的连接
-        // filterFactoryBean.setSuccessUrl("./home.html");
+        filterFactoryBean.setSuccessUrl("/");
         // 用户访问未对其授权的资源时,所显示的连接
         filterFactoryBean.setUnauthorizedUrl("/error.html");
         // 连接约束配置,即过滤链的定义
@@ -127,11 +124,14 @@ public class SpringShiroConfig {
      */
     private Map<String, String> filterChainDefinitionMap() {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+        // 跳过
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/loginpage", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/logout", "anon");
-        filterChainDefinitionMap.put("/page/**", "authc");
+        // 需要权限
+        filterChainDefinitionMap.put("/user/**", "authc");
+        // filterChainDefinitionMap.put("/user2/**", "authc");
 
         return filterChainDefinitionMap;
     }
@@ -139,15 +139,17 @@ public class SpringShiroConfig {
     /*
      以下配置AOP式方法级权限检查，
      即可以使用注解进行拦截
+
+     细节：返回类型为父类的时候会失效；注解只能在controller层中有效
      */
-    @Bean
-    public BeanPostProcessor lifecycleBeanPostProcessor() {
+    @Bean(name = "lifecycleBeanPostProcessor")
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
-    public ProxyConfig advisorAutoProxyCreator() {
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
         advisorAutoProxyCreator.setProxyTargetClass(true);
 
@@ -155,7 +157,7 @@ public class SpringShiroConfig {
     }
 
     @Bean
-    public Pointcut authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
 
