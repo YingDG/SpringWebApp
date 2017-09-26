@@ -1,5 +1,8 @@
 package yingdg.exercise.springwebapp.controller;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
@@ -9,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
-import yingdg.exercise.springwebapp.repository.UserMapper;
 import yingdg.exercise.springwebapp.model.User;
+import yingdg.exercise.springwebapp.repository.UserMapper;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -36,6 +39,7 @@ public class HomeController {
      */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
+    @RequiresRoles("admin")
     public ResponseEntity<User> findUser(@PathVariable("id") int id) {
         User user = mapper.findUserById(id);
         System.out.println(user);
@@ -46,6 +50,7 @@ public class HomeController {
     Thymeleaf页面渲染
      */
     @RequestMapping(value = "/user2/{id}", method = RequestMethod.GET)
+    @RequiresPermissions(value = {"visit", "haha"}, logical = Logical.OR)
     public String findUser2(@PathVariable("id") int id, Model model) {
         User user = mapper.findUserById(id);
         System.out.println(user);

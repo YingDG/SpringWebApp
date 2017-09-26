@@ -2,7 +2,6 @@ package yingdg.exercise.springwebapp.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -46,6 +45,7 @@ public class LoginController {
             System.out.println("是否登录？：" + subject.isAuthenticated());
 
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            token.setRememberMe(true);
             subject.login(token);
 
             System.out.println("登录？：" + subject.isAuthenticated());
@@ -63,7 +63,6 @@ public class LoginController {
     }
 
     @GetMapping(value = "/logout")
-    @RequiresAuthentication
     public String logout() {
         SecurityUtils.getSubject().logout();
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "./home.html";
