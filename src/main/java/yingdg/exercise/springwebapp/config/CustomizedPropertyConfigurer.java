@@ -3,12 +3,14 @@ package yingdg.exercise.springwebapp.config;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
 /**
  * Created by yingdg on 2017/9/26 0026.
  */
+@Component
 public class CustomizedPropertyConfigurer extends PropertyPlaceholderConfigurer {
 
     @Override
