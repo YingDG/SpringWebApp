@@ -1,4 +1,4 @@
-package yingdg.exercise.test;
+package yingdg.exercise.springwebapp.test;
 
 import org.junit.Ignore;
 import org.junit.Test;

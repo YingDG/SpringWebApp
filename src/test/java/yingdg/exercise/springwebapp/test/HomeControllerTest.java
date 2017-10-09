@@ -1,4 +1,4 @@
-package yingdg.exercise.test;
+package yingdg.exercise.springwebapp.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
