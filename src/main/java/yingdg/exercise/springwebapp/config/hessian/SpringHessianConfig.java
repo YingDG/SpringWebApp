@@ -6,6 +6,7 @@ import org.springframework.remoting.caucho.HessianProxyFactoryBean;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import yingdg.exercise.springwebapp.service.remote.IMessage;
 import yingdg.exercise.springwebapp.service.remote.MessageImpl;
+import yingdg.exercise.springwebapp.service.remote.client.IClientMessage;
 
 import javax.annotation.Resource;
 
@@ -36,14 +37,19 @@ public class SpringHessianConfig {
     客户端调用类
      */
     @Bean
-    public HessianProxyFactoryBean hessianProxyFactoryBean() {
+    public HessianProxyFactoryBean hessianProxy() {
         HessianProxyFactoryBean hessianProxyFactoryBean = new HessianProxyFactoryBean();
+        hessianProxyFactoryBean.setHessian2(true);
         // 配置RMI url
         hessianProxyFactoryBean.setServiceUrl(
                 "http://localhost:8080/SpringWebApp/remote/api/servletService");
         // 配置RMI接口（客户端的接口，即与服务端共用的接口）
         hessianProxyFactoryBean.setServiceInterface(
-                yingdg.exercise.springwebapp.service.remote.client.IMessage.class);
+                /*
+                 类名可以与服务端类名不一样，方法一致即可
+                 不调用的方法可以不声明
+                  */
+                IClientMessage.class);
 
         return hessianProxyFactoryBean;
     }

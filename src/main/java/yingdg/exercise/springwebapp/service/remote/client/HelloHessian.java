@@ -12,7 +12,7 @@ public class HelloHessian {
 
     public static void main(String[] args) throws MalformedURLException {
         HessianProxyFactory proxyFactory = new HessianProxyFactory();
-        IMessage message = (IMessage) proxyFactory.create(IMessage.class, URL);
+        IClientMessage message = (IClientMessage) proxyFactory.create(IClientMessage.class, URL);
 
         message.setMessage("hello");
         System.out.println(message.sayHello());

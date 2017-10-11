@@ -62,8 +62,6 @@
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.1.1" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.6" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-jms:4.3.5.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.3.5.RELEASE" />
           <element id="library" level="project" name="Maven: com.caucho:hessian:4.0.51" />
         </element>
       </element>
