@@ -24,10 +24,11 @@ import java.io.Serializable;
 // 开启文件上传类
 @MultipartConfig // 不实现序列化接口，加载redis后出现异常？
 public class FileController implements Serializable {
+    private static final long serialVersionUID = -1705709678290445745L;
 
     /*
-    上传文件
-     */
+        上传文件
+         */
     @RequestMapping(value = "/file", method = RequestMethod.POST)
     public void uploadFile(@RequestPart("userFile") MultipartFile userFile) throws IOException {
         // 上传文件存盘

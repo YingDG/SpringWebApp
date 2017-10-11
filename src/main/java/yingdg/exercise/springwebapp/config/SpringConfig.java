@@ -4,6 +4,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import yingdg.exercise.springwebapp.config.condition.SpringConditionConfig;
 import yingdg.exercise.springwebapp.config.datasource.SpringDataSourceConfig;
+import yingdg.exercise.springwebapp.config.hessian.SpringHessianConfig;
 import yingdg.exercise.springwebapp.config.httpsession.SpringSessionConfig;
 import yingdg.exercise.springwebapp.config.shiro.SpringShiroConfig;
 
@@ -40,7 +41,9 @@ import java.util.regex.Pattern;
         // 分布式Session
         SpringSessionConfig.class,
         // shiro安全认证
-        SpringShiroConfig.class
+        SpringShiroConfig.class,
+        // hession远程服务调用
+        SpringHessianConfig.class
 })
 public class SpringConfig {
 

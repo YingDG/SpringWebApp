@@ -241,6 +241,18 @@
             <version>0.1.4</version>
         </dependency>
 
+        <!--RMI服务-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!--hessian-->
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.51</version>
+        </dependency>
     </dependencies>
 
     <build>
