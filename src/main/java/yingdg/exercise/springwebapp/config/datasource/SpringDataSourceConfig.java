@@ -27,7 +27,7 @@ import java.util.Properties;
  */
 @Configuration
 // 配置文件加载
-@PropertySource({"classpath:jdbc.properties"})
+@PropertySource(value = {"classpath:jdbc.properties"}, encoding = "UTF-8")
 // 开启声明式事务
 @EnableTransactionManagement
 // Mybatis Mapper配置扫描
@@ -176,6 +176,8 @@ public class SpringDataSourceConfig {
         // configuration.setUseGeneratedKeys(true);
         // 排除null值
         configuration.setCallSettersOnNulls(true);
+        // 设置数据库操作时间（秒）
+        configuration.setDefaultStatementTimeout(10);
 
         return configuration;
     }
