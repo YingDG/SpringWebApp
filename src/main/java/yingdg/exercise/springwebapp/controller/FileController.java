@@ -30,6 +30,7 @@ public class FileController implements Serializable {
         上传文件
          */
     @RequestMapping(value = "/file", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
     public void uploadFile(@RequestPart("userFile") MultipartFile userFile) throws IOException {
         // 上传文件存盘
         userFile.transferTo(new File("E:/uploads/" + new String(userFile.getOriginalFilename())));
