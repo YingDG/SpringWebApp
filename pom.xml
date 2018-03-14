@@ -151,31 +151,15 @@
         </dependency>
         <!--值校验-->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.3.4.Final</version>
         </dependency>
         <!--非SpringMVC校验必备-->
         <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
             <version>2.2.6</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>javax.el-api</artifactId>
-                    <groupId>javax.el</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <!--<dependency>-->
         <!--<groupId>com.sun.el</groupId>-->
